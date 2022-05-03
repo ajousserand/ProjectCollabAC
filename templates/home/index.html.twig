@@ -7,9 +7,16 @@
 
 {% block body %}
 
-    <div>
-   <h2> Les jeux les plus joué </h2>
-    {% for game in LastPublishedGames  %}
+    <div class="row">
+   <h2> Nos derniers jeux: </h2>
+    {% for game in lastPublishedGames  %}
+            {% include 'games/cardView.html.twig' %}
+    {% endfor %}
+   </div>
+
+   <div class="row">
+   <h2> Les dernier commentaires: </h2>
+    {% for comment in lastComments  %}
             {% include 'games/cardView.html.twig' %}
     {% endfor %}
    </div>

@@ -7,6 +7,10 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('styles') }}
         {% endblock %}
+        
+        {% block javascripts %}
+            {{ encore_entry_script_tags('scripts') }}
+        {% endblock %}
     </head>
     <body>
         <header>
@@ -14,18 +18,11 @@
             {% include 'common/_navbar.html.twig' %}
             {% endblock %}
         </header>
-        <div id="container">
         {% block body %}
         {% endblock %}
-        </div>
         <footer>
             {% block footer %}
             {% endblock %}
         </footer>
     </body>
-    <script>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('scripts') }}
-        {% endblock %}
-    </script>
 </html>
