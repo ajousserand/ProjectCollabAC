@@ -1,9 +1,12 @@
-{% extends 'base.html.twig' %}
+    <div class="col-3">
+        <div class="cardContainer mx-2 my-3">
 
-{% block body %}
-    <div id="cardContainer" class="col-lg-3">
-        <div id="imgContainer">
-            <img src="{{game.thumbnailCover}}">
+            <div class="imageContainer">
+                <img src="{{game.thumbnailCover}}">
+            </div>
+            <div class="reductionContainer">
+                <p>-40%</p>
+            </div>
+
         </div>
     </div>
-{% endblock %}

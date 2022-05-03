@@ -1,1 +1,33 @@
 @import 'variables';
+
+.cardContainer {
+    width: 200px;
+    height: 300px;
+    position: relative;
+    border-radius: 15px;
+}
+
+.imageContainer {
+    width: 100%;
+    height: 100%;
+
+    >img {
+        width: 100%;
+        height: 100%
+    }
+}
+
+.reductionContainer {
+
+    width: 2.5rem;
+    height: 2rem;
+    color: antiquewhite;
+    background-color: $or_bg;
+    position: absolute;
+    border-top-left-radius: 5px;
+    bottom: 0;
+    right: 0;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 0.2rem;
+}
