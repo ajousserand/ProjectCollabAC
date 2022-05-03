@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Account;
 use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\AST\Functions\SumFunction;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -32,5 +33,15 @@ class LibraryRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function gameByPlayed() {
+       
+        return $this->createQueryBuilder('l')
+            ->select('SUM(game_time)','library','game')
+            ->join('l.game','game')
+            ->orderBy('SUM(game_time)','DESC')
+            ->setMaxResults(9)
+            ->getQuery()->getResult();
     }
 }
