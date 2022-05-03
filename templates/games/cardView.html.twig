@@ -1,12 +1,13 @@
-    
+    <a href="{{ path('app_game_detail, {slug:game.slug}') }}">
         <div class="cardContainer mx-2 my-3">
 
             <div class="imageContainer">
                 <img src="{{game.thumbnailCover}}">
             </div>
             <div class="reductionContainer">
-                <p>-40%</p>
+                <p>{{game.price}}€</p>
             </div>
 
         </div>
+    </a>
     
