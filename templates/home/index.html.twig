@@ -9,7 +9,7 @@
 
 <div class="container">
     <div class="row">
-    <h2 class="mt-6 mb-4"> Nos derniers jeux: </h2>
+    <h2 class="my-5"> Nos derniers jeux: </h2>
             
             {% for game in lastPublishedGames  %}
                 <div class="col-4">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="row mx-auto">
-    <h2 class="mt-6 mb-4"> Les dernier avis: </h2>
+    <h2 class="my-5"> Les dernier avis: </h2>
         {% for comment in lastComments  %}
             <div class="my-3">
                 <h5><span class="orange">{{comment.account.nickname}}</span> <span style="font-size:1rem"> à jouer à </span> {{comment.game.name}}:</h5>
@@ -29,5 +29,13 @@
             </div>
         {% endfor %}
     </div>
+
+    {# <h2 class="my-5"> Les dernier avis: </h2>
+        {% for library in mostPlayedGames  %}
+            <div class="my-3">
+                {{ library.game.name}}
+            </div>
+        {% endfor %}
+    </div> #}
 </div>
 {% endblock %}

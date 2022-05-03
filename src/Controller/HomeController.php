@@ -25,7 +25,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'lastPublishedGames' => $gameByPublished,
             'lastComments' => $lastComment,
-            'mostGamePlayed'=> $mostGamePlayed
+            'mostGamePlayed' => $mostGamePlayed
         ]);
     }
 }
