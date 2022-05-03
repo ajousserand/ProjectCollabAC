@@ -17,10 +17,12 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        $gameByPublished = $this->gameRepository->findBy('createdAt', 'DESC', 9);
+        $gameByPublished = $this->gameRepository->findBy('publishedAt', 'DESC', 9);
+        $lastComment = $this->commentRepository->findBy('createdAt','DESC',4);
 
         return $this->render('home/index.html.twig', [
-            'LastPublishedGames' => $gameByPublished,
+            'lastPublishedGames' => $gameByPublished,
+            'lastComments' => $lastComment,
         ]);
     }
 }
