@@ -38,7 +38,9 @@ class CommentRepository extends ServiceEntityRepository
     public function lastComment() {
        
         return $this->createQueryBuilder('c')
-            ->select('c')
+            ->select('c','a','g')
+            ->join('c.g','g')
+            ->join('C.a','a')
             ->orderBy('c.createdAt','DESC')
             ->setMaxResults(4)
             ->getQuery()->getResult();
