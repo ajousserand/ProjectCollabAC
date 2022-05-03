@@ -4,14 +4,13 @@ namespace App\Controller;
 
 use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
-use App\Repository\LibraryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    public function __construct(private GameRepository $gameRepository, private CommentRepository $commentRepository, private LibraryRepository $libraryRepository)
+    public function __construct(private GameRepository $gameRepository, private CommentRepository $commentRepository)
     {
     }
 
