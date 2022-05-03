@@ -13,7 +13,7 @@ class GameDetailController extends AbstractController
     {
         
     }
-    #[Route('/jeux/{slug}', name: 'app_game_detail')]
+    #[Route('/jeuxa/{slug}', name: 'app_game_detail')]
     public function index(string $slug): Response
     {
 
