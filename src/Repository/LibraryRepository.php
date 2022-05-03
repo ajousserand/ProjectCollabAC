@@ -38,10 +38,10 @@ class LibraryRepository extends ServiceEntityRepository
     public function gameByPlayed() {
        
         return $this->createQueryBuilder('l')
-            ->select('SUM(gameTime)','library','game')
+            ->select('SUM(l.gameTime)','library','game')
             ->join('l.game','game')
             ->groupBy('game.id')
-            ->orderBy('SUM(gameTime)','DESC')
+            ->orderBy('SUM(l.gameTime)','DESC')
             ->setMaxResults(9)
             ->getQuery()->getResult();
     }
