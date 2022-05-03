@@ -55,5 +55,17 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
+    public function mostBoughtGame(int $limit) {
+       
+        return $this->createQueryBuilder('g')
+            ->join(Library::class, 'lib', ExprJoin::WITH, 'lib.game = g')
+            ->groupBy('g.name')
+            ->orderBy('COUNT(lib.game)', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     
 }
