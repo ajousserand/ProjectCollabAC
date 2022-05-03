@@ -4,8 +4,12 @@
 
 {% block body %}
 
- {% for game in gameEntities %}
+   <div class="row">
+   {% for game in gameEntities %}
+   
     {% include 'games/cardView.html.twig' %}
- {% endfor %}
+
+   {% endfor %}
+   </div>
 
 {% endblock %}

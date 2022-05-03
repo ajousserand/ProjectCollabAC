@@ -17,7 +17,6 @@ class GamesController extends AbstractController
     public function index(): Response
     {
         $gameEntities = $this->gameRepository->findAll();
-        dd($gameEntities);
 
         return $this->render('games/index.html.twig', [
             'controller_name' => 'GamesController',
