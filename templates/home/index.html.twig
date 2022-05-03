@@ -7,18 +7,25 @@
 
 {% block body %}
 
-    <div class="row">
+<div class="row">
    <h2> Nos derniers jeux: </h2>
-    {% for game in lastPublishedGames  %}
-            {% include 'games/cardView.html.twig' %}
-    {% endfor %}
-   </div>
+        
+        {% for game in lastPublishedGames  %}
+            <div class="col-4">
+                {% include 'games/cardView.html.twig' %}
+            </div>
+        {% endfor %}
+        
+</div>
 
-   <div class="row">
+<div class="row mx-auto">
    <h2> Les dernier commentaires: </h2>
     {% for comment in lastComments  %}
-            {% include 'games/cardView.html.twig' %}
+        <div>
+            {{comment.createdAt | date('d/m/Y')}}
+            {{comment.content}}
+        </div>
     {% endfor %}
-   </div>
+</div>
   
 {% endblock %}
