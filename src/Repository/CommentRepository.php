@@ -19,17 +19,27 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    public function add(Comment $comment, bool $flush = true): void {
+    public function add(Comment $comment, bool $flush = true): void
+    {
         $this->_em->persist($comment);
         if ($flush) {
             $this->_em->flush();
         }
     }
 
-    public function remove(Comment $comment, bool $flush = true): void {
+    public function remove(Comment $comment, bool $flush = true): void
+    {
         $this->_em->remove($comment);
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function getLastComment()
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 }
