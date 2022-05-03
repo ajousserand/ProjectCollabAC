@@ -20,7 +20,7 @@ class HomeController extends AbstractController
     {
         $gameByPublished = $this->gameRepository->gameByPublishedAt();
         $lastComment = $this->commentRepository->lastComment();
-        $mostGamePlayed = $this->libraryRepository->gameByPlayed();
+        $mostGamePlayed = $this->gameRepository->mostPlayedGame(9);
 
         return $this->render('home/index.html.twig', [
             'lastPublishedGames' => $gameByPublished,
