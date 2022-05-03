@@ -37,7 +37,7 @@ class GameRepository extends ServiceEntityRepository
        
         return $this->createQueryBuilder('g')
             ->select('g')
-            ->orderBy('publishedAt','DESC')
+            ->orderBy('g.publishedAt','DESC')
             ->setMaxResults(9)
             ->getQuery()->getResult();
     }

@@ -39,7 +39,7 @@ class CommentRepository extends ServiceEntityRepository
        
         return $this->createQueryBuilder('c')
             ->select('c')
-            ->orderBy('created','DESC')
+            ->orderBy('c.createdAt','DESC')
             ->setMaxResults(4)
             ->getQuery()->getResult();
     }
