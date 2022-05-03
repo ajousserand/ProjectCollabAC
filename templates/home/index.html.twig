@@ -6,6 +6,12 @@
 
 
 {% block body %}
-   
+
+    <div>
+   <h2> Les jeux les plus joué </h2>
+    {% for game in LastPublishedGames  %}
+            {% include 'games/cardView.html.twig' %}
+    {% endfor %}
+   </div>
   
 {% endblock %}
