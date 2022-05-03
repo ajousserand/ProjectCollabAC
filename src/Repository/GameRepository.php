@@ -19,19 +19,28 @@ class GameRepository extends ServiceEntityRepository
         parent::__construct($registry, Game::class);
     }
 
-    public function add(Game $game, bool $flush = true): void
-    {
+    public function add(Game $game, bool $flush = true): void {
         $this->_em->persist($game);
         if ($flush) {
             $this->_em->flush();
         }
     }
 
-    public function remove(Game $game, bool $flush = true): void
-    {
+    public function remove(Game $game, bool $flush = true): void {
         $this->_em->remove($game);
         if ($flush) {
             $this->_em->flush();
         }
     }
+
+    public function gameByPublishedAt() {
+       
+        return $this->createQueryBuilder('g')
+            ->select('g')
+            ->orderBy('publishedAt','DESC')
+            ->setMaxResults(9)
+            ->getQuery()->getResult();
+    }
+
+    
 }

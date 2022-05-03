@@ -34,4 +34,13 @@ class CommentRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    public function lastComment() {
+       
+        return $this->createQueryBuilder('c')
+            ->select('c')
+            ->orderBy('created','DESC')
+            ->setMaxResults(4)
+            ->getQuery()->getResult();
+    }
 }
