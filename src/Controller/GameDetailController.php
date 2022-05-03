@@ -17,7 +17,7 @@ class GameDetailController extends AbstractController
     public function index(string $slug): Response
     {
 
-        $game = $this->gameRepository->findOneBy($slug);
+        $game = $this->gameRepository->findOneBy([$slug]);
         return $this->render('game_detail/index.html.twig', [
             'gameDetail' => $game,
         ]);
