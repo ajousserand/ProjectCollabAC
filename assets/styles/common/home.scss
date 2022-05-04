@@ -4,19 +4,19 @@
 
     background-color: rgba(16, 16, 16, 0.5);
     border-radius: 20px;
-    width: 220px;
-    padding: 0.5rem;
+    width: 237px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 37px;
+    padding-right: 37px;
+
 
     h5 {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .orange {
         color: $or_bg;
-    }
-
-    .tinyFont {
-        font-size: 0.9rem;
     }
 
     p {
@@ -26,6 +26,11 @@
 
 .gameContainer {
     width: 250px;
+}
+
+.dark {
+    width: 100%;
+    background-color: rgba(16, 16, 16, 0.3);
 }
 
 

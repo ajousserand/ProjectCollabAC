@@ -1,17 +1,15 @@
 <a href="{{ path('st_games', {slug:game.slug}) }}">
-        <div class="cardContainer mx-2 my-3">
-
+        <div class="cardContainer mx-2 my-4">
             <div class="imageContainer">
                 <img src="{{game.thumbnailCover}}">
             </div>
             <div class="reductionContainer">
                 <p>{{game.price}}€</p>
             </div>
-
         </div>
 </a>
 <a href="{{ path('st_games', {slug:game.slug}) }}">
-    <p class="text-center">{{game.name}}</p>
+    <p class="text-center" style="margin-top:-15px; font-size:1.1rem">{{game.name}}</p>
 </a>
     
     

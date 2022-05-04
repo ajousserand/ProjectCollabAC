@@ -12,6 +12,12 @@
     }
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+
 .imageContainer {
     width: 100%;
     height: 100%;
@@ -36,4 +42,5 @@
     font-weight: bold;
     font-size: 0.8rem;
     padding: 0.2rem;
+    text-align: center;
 }
