@@ -15,8 +15,8 @@
         <div class="col-6">
             <div class="imageContainer">
                 <p class="px-2">{{gameDetail.description}}</p>
-                    {% for genre in genres %}
-                        <p>genres.name</p>
+                    {% for genre in gameDetail.genres %}
+                        <p>{{genre.name}}</p>
                     {% endfor %}
             </div>
             
