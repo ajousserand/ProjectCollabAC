@@ -4,20 +4,34 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="text-center">{{gameDetail.name}}</h1>
+    <h1 class="text-center mt-5 mb-5">{{gameDetail.name}}</h1>
     <div class="row">
         <div class="col-6">
-            <div class="imageContainer">
+            <div class="thumbContainer px-5">
                 <img src="{{gameDetail.thumbNailCover}}">
             </div>
             
         </div>
         <div class="col-6">
             <div class="imageContainer">
-                <p class="px-2">{{gameDetail.description}}</p>
+                <div class="row d-flex justify-content-center">
                     {% for genre in gameDetail.genres %}
-                        <p>{{genre.name}}</p>
+                            <div class="col-lg-1 ">
+                                <p>{{genre.name}}</p>
+                            </div>
                     {% endfor %}
+                </div>
+                <p class="px-2">{{gameDetail.description}}</p>
+                    
+                <div class="row d-flex justify-content-center">
+                    {% for country in gameDetail.countries %}
+                        <div class="col-lg-1">
+                        <img src="{{country.urlFlag}}">
+                        </div>
+                    {% endfor %}
+                </div>
+                    
+
             </div>
             
         </div>
