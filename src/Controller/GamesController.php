@@ -23,12 +23,10 @@ class GamesController extends AbstractController
             ]);
         }
 
-        $genres = $this->gameRepository->genrePerGame($slug);
-        dd($genres);
-        $game = $this->gameRepository->findOneBy(['slug' => $slug]);
+        $game = $this->gameRepository->getGameBySlug($slug);
         return $this->render('game_detail/index.html.twig', [
             'gameDetail' => $game,
-            'genres' => $genres
+
         ]);
     }
 }

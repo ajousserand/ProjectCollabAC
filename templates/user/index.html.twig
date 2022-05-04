@@ -13,14 +13,16 @@
 
     <h2>Jeux de {{user.name}}</h2>
     <div class="row my-5">
-            {% for libraries in user.libraries %}
+            {% for library in user.libraries %}
                 <div class="col-3">
-                    <p>{{libraries.game.name}}</p>
-                    <a href="{{ path('st_games', {slug:libraries.game.slug}) }}">
+                    <p>{{library.game.name}}</p>
+                    <a href="{{ path('st_games', {slug:library.game.slug}) }}">
                         <div class="cardContainer mx-2 my-4">
                             <div class="imageContainer">
-                                <img src="{{libraries.game.thumbnailCover}}">
+                                <img src="{{library.game.thumbnailCover}}">
                             </div>
+                            <p>Temp de jeu: {{librairies.game_time}}</p>
+                            <p>Dernière partie: {{librairies.lastUsedAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} </p>
                         </div>
                     </a>
                 </div>
