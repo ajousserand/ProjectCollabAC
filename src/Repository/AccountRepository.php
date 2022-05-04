@@ -19,18 +19,23 @@ class AccountRepository extends ServiceEntityRepository
         parent::__construct($registry, Account::class);
     }
 
-    public function add(Account $account, bool $flush = true): void {
+    public function add(Account $account, bool $flush = true): void
+    {
         $this->_em->persist($account);
         if ($flush) {
             $this->_em->flush();
         }
     }
 
-    public function remove(Account $account, bool $flush = true): void {
+    public function remove(Account $account, bool $flush = true): void
+    {
         $this->_em->remove($account);
         if ($flush) {
             $this->_em->flush();
         }
     }
 
+    // public function getAccountByName()
+    // {
+    // }
 }
