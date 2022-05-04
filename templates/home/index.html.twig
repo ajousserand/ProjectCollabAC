@@ -39,12 +39,8 @@
     <h2 class="mb-5"> Les derniers avis : </h2>
     <div class="row">
         {% for comment in lastComments  %}
-            <div class="col-lg-3 px-3">
-                <div class="commentContainer">
-                    <a href="{{path('st_games', {slug:comment.game.slug})}}"><h5 class="orange link"> {{comment.game.name}}</h5><a>
-                    <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} par <a class="orange link" href="{{path('st_user', {name:comment.account.name})}}"> {{comment.account.nickname}}</a></p>
-                    <p>{{comment.content|slice(0, 100) ~ '...'}}</p>
-                </div>
+            <div class="homeComments col-lg-3 px-3">
+                {% include 'home/_comment.html.twig' %}
             </div>
         {% endfor %}
     </div>

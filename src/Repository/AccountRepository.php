@@ -44,8 +44,8 @@ class AccountRepository extends ServiceEntityRepository
         // Genre::class, 'genre', ExprJoin::WITH, 'genre.games = g.genres'
         return $this->createQueryBuilder('a')
             ->select('a')
-            ->join(Library::class, 'library', ExprJoin::WITH, 'library.account = a')
-            // ->join(Game::class, 'game', ExprJoin::WITH, 'game.id = library.game')
+            // ->join('account.libraries', 'libraries')
+            // ->join(Game::class, 'game', ExprJoin::WITH, 'account.game = game')
             ->where('a.name = :name')
             ->setParameter('name', $name)
             ->getQuery()

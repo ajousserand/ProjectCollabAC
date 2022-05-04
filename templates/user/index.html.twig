@@ -4,27 +4,36 @@
 
 {% block body %}
 
-<div class="text-center container mx-auto">
+<div class="container mx-auto">
 
     <div class="infoContainer my-5">
-        <h1> {{user.name}} </h1>
+        <h3> {{user.name}} </h3>
         <p>Pseudo : {{user.nickname}}</p>
     </div>
 
     <h2>Jeux de {{user.name}}</h2>
-    <div class="row my-5">
+    <div class="row">
             {% for library in user.libraries %}
-                <div class="col-3">
-                    <p>{{library.game.name}}</p>
+                <div class="col-3 py-5">
                     <a href="{{ path('st_games', {slug:library.game.slug}) }}">
                         <div class="cardContainer mx-2 my-4">
                             <div class="imageContainer">
                                 <img src="{{library.game.thumbnailCover}}">
                             </div>
-                            <p>Temp de jeu: {{librairies.game_time}}</p>
-                            <p>Dernière partie: {{librairies.lastUsedAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} </p>
                         </div>
                     </a>
+                    <div class="infoUserGameContainer">
+                        <p class="mb-0">{{library.game.name}}</p>
+                        <p class="mb-0">Temp de jeu: {{library.timeConverter }}</p>
+                        <p>Dernière partie le {{library.lastUsedAt | date('d/m/Y')}}</p>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <h2 class="py-3">Les avis de {{user.name}}</h2>
+            {% for comment in user.comments %}
+                <div class="userComments col-lg-3 px-3">
+                    {% include 'home/_comment.html.twig' %}
                 </div>
             {% endfor %}
     </div>
