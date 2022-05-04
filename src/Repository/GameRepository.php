@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Genre;
 use App\Entity\Game;
 use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -68,5 +69,16 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
+    public function genrePerGame(string $slug) {
+       
+        return $this->createQueryBuilder('g')
+            ->join(Genre::class, 'genre', ExprJoin::WITH, 'genre.games = g.genres')
+            ->where('g.slug = :slug')
+            ->setParameter('slug',$slug)
+            ->select('genre.name')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 }
