@@ -1,15 +1,13 @@
 <a href="{{ path('st_games', {slug:game.slug}) }}">
-        <div class="cardContainer mx-2 my-4">
-            <div class="imageContainer">
-                <img src="{{game.thumbnailCover}}">
-            </div>
-            <div class="reductionContainer">
-                <p>{{game.price}}€</p>
-            </div>
+    <div class="cardContainer">
+        <div class="imageContainer">
+            <img src="{{game.thumbnailCover}}">
         </div>
-</a>
-<a href="{{ path('st_games', {slug:game.slug}) }}">
-    <p class="text-center" style="margin-top:-15px; font-size:1.1rem">{{game.name}}</p>
+        <div class="reductionContainer">
+            <p>{{game.price}}€</p>
+        </div>
+    </div>
+    <p class="text-center mt-2">{{game.name}}</p>
 </a>
     
     

@@ -7,47 +7,62 @@
 
 {% block body %}
 
-<div class="container py-5">
-    <div class="row">
-        <h2 class="my-5"> Nos derniers jeux : </h2>   
+<div class="container">
+    <h2 class="my-5"> Nos derniers jeux : </h2>  
+    <div class="row"> 
         {% for game in lastPublishedGames  %}
-            <div class="gameContainer mx-5 col-4">
-                {% include 'games/cardView.html.twig' %}
+            <div class="col-lg-4 px-5">            
+                <div>
+                    {% include 'games/cardView.html.twig' %}
+                </div>
             </div>
         {% endfor %}    
     </div>
 </div>
 
-<div class="dark">
-    <div class="container row mx-auto py-5">
-        <h2 class="my-5"> Les plus joués : </h2>
-        {% for game in mostGamePlayed  %}
-            <div class="gameContainer mx-5 col-4">
-                    {% include 'games/cardView.html.twig' %}
+<div class="dark mt-5">
+    <div class="container py-5">
+        <h2 class="mb-5"> Les plus joués : </h2>
+        <div class="row">
+            {% for game in mostGamePlayed  %}
+                <div class="col-lg-4 px-5">            
+                    <div>
+                        {% include 'games/cardView.html.twig' %}
+                    </div>
                 </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="container pt-5">
+    <h2 class="mb-5"> Les derniers avis : </h2>
+    <div class="row">
+        {% for comment in lastComments  %}
+            <div class="col-lg-3 px-3">
+                <div class="commentContainer">
+                    <h5 class="orange link"> {{comment.game.name}}</h5>
+                    <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} par <a class="orange link" href="{{path('st_user', {name:comment.account.name})}}"> {{comment.account.nickname}}</a></p>
+                    <p>{{comment.content|slice(0, 100) ~ '...'}}</p>
+                </div>
+            </div>
         {% endfor %}
     </div>
 </div>
 
-<div class="container row mx-auto py-5">
-    <h2 class="my-5"> Les derniers avis : </h2>
-    {% for comment in lastComments  %}
-        <div class="my-3 mx-3 col-3 commentContainer">
-            <h5> {{comment.game.name}} :</h5>
-            <p> le {{comment.createdAt | date('d M Y')}} par <span class="orange">{{comment.account.nickname}}</span></p>
-            <p>{{comment.content}}</p>
-        </div>
-    {% endfor %}
-</div>
 
-<div class="dark">
-    <div class="container row mx-auto py-5">
-        <h2 class="my-5"> Top de ventes : </h2>
-        {% for game in mostBoughtGame  %}
-            <div class="gameContainer mx-5 col-4">
-                    {% include 'games/cardView.html.twig' %}
+<div class="dark mt-5">
+    <div class="container pt-5">
+        <h2 class="mb-5"> Top des ventes : </h2>
+        <div class="row">
+            {% for game in mostBoughtGame  %}
+                <div class="col-lg-4 px-5">            
+                    <div>
+                        {% include 'games/cardView.html.twig' %}
+                    </div>
                 </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 

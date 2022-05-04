@@ -3,8 +3,8 @@
 .commentContainer {
 
     background-color: rgba(16, 16, 16, 0.5);
+    height: 200px;
     border-radius: 20px;
-    width: 237px;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 37px;
@@ -15,17 +15,19 @@
         font-size: 1.2rem;
     }
 
-    .orange {
-        color: $or_bg;
-    }
-
     p {
         font-size: 0.8rem;
     }
 }
 
-.gameContainer {
-    width: 250px;
+.orange {
+    color: $or_bg;
+
+    &.link {
+        &:hover {
+            color: lighten($or_bg, 20%);
+        }
+    }
 }
 
 .dark {
