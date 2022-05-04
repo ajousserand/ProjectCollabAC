@@ -13,14 +13,20 @@ class GamesController extends AbstractController
     {
     }
 
-    #[Route('/jeux', name: 'st_games')]
-    public function index(): Response
+    #[Route('/jeux/{slug}', name: 'st_games')]
+    public function index(string $slug=""): Response
     {
-        $gameEntities = $this->gameRepository->findAll();
-
-        return $this->render('games/index.html.twig', [
-            'controller_name' => 'GamesController',
+        if($slug==""){
+            $gameEntities = $this->gameRepository->findAll();
+            return $this->render('games/index.html.twig', [
             'gameEntities' => $gameEntities
-        ]);
+            ]);
+        }
+
+        $game = $this->gameRepository->findOneBy(['slug'=>$slug]);
+        return $this->render('game_detail/index.html.twig', [
+                'gameDetail' => $game,
+            ]); 
+        
     }
 }
