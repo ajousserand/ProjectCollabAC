@@ -12,7 +12,7 @@
     <h2 class="my-5"> Nos derniers jeux: </h2>
             
             {% for game in lastPublishedGames  %}
-                <div class="col-4">
+                <div class="gameContainer mx-5 col-4">
                     {% include 'games/cardView.html.twig' %}
                 </div>
             {% endfor %}
@@ -20,25 +20,25 @@
     </div>
 
     <div class="row mx-auto">
-    <h2 class="my-5"> Les dernier avis: </h2>
+    <h2 class="my-5"> Les derniers avis: </h2>
         {% for comment in lastComments  %}
-            <div class="my-3 mx-2 col-3 commentContainer">
-                <h5><span class="orange">{{comment.account.nickname}}</span> <span style="font-size:1rem"> à jouer à </span> {{comment.game.name}}:</h5>
+            <div class="my-3 mx-3 col-3 commentContainer">
+                <h5><span class="orange">{{comment.account.nickname}}</span> <span classs="tinyFont"> à jouer à </span> {{comment.game.name}}:</h5>
                 <p> le {{comment.createdAt | date('d/m/Y')}}</p>
                 <p>{{comment.content}}</p>
             </div>
         {% endfor %}
 
-    <h2 class="my-5"> Les plus joué </h2>
+    <h2 class="my-5"> Les plus joués: </h2>
         {% for game in mostGamePlayed  %}
-            <div class="col-4">
+            <div class="gameContainer mx-5 col-4">
                     {% include 'games/cardView.html.twig' %}
                 </div>
         {% endfor %}
 
        <h2 class="my-5"> Top de ventes: </h2>
         {% for game in mostBoughtGame  %}
-            <div class="col-4">
+            <div class="gameContainer mx-5 col-4">
                     {% include 'games/cardView.html.twig' %}
                 </div>
         {% endfor %}

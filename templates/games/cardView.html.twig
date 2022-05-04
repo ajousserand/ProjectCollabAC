@@ -1,5 +1,4 @@
-    <div>
-    <a href="{{ path('st_games', {slug:game.slug}) }}">
+<a href="{{ path('st_games', {slug:game.slug}) }}">
         <div class="cardContainer mx-2 my-3">
 
             <div class="imageContainer">
@@ -10,7 +9,9 @@
             </div>
 
         </div>
-    </a>
-    <h2 class="text-center">{{game.name}}</h2>
-    </div>
+</a>
+<a href="{{ path('st_games', {slug:game.slug}) }}">
+    <p class="text-center">{{game.name}}</p>
+</a>
+    
     
