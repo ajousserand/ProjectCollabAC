@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Account;
+use App\Entity\Game;
+use App\Entity\Genre;
+use App\Entity\Library;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join as ExprJoin;
 
 /**
  * @method Account|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,7 +39,16 @@ class AccountRepository extends ServiceEntityRepository
         }
     }
 
-    // public function getAccountByName()
-    // {
-    // }
+    public function getAccountByName(string $name)
+    {
+        // Genre::class, 'genre', ExprJoin::WITH, 'genre.games = g.genres'
+        return $this->createQueryBuilder('a')
+            ->select('a')
+            ->join(Library::class, 'library', ExprJoin::WITH, 'library.account = a')
+            // ->join(Game::class, 'game', ExprJoin::WITH, 'game.id = library.game')
+            ->where('a.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

@@ -16,14 +16,16 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/user/{name}', name: 'app_user')]
+    #[Route('/{name}', name: 'app_user')]
     public function index(string $name): Response
     {
         if ($name) {
-            
+            // dd($this->accountRepository->getAccountByName($name));
             return $this->render('user/index.html.twig', [
                 'controller_name' => 'UserController',
+                'user' =>  $this->accountRepository->getAccountByName($name),
             ]);
         }
+        return 'Pas de compte correspondant à ce pseudo';
     }
 }

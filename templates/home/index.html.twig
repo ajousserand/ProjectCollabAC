@@ -34,7 +34,7 @@
     {% for comment in lastComments  %}
         <div class="my-3 mx-3 col-3 commentContainer">
             <h5> {{comment.game.name}} :</h5>
-            <p> le {{comment.createdAt | date('d/m/Y')}} par <span class="orange">{{comment.account.nickname}}</span></p>
+            <p> le {{comment.createdAt | date('d M Y')}} par <span class="orange">{{comment.account.nickname}}</span></p>
             <p>{{comment.content}}</p>
         </div>
     {% endfor %}
