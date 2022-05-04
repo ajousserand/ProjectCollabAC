@@ -78,6 +78,8 @@ class GameRepository extends ServiceEntityRepository
             ->join('g.comments', 'comment')
             ->where('g.slug = :slug')
             ->setParameter('slug',$slug)
+            ->orderBy('comment.createdAt', 'DESC')
+            ->setMaxResults(6)
             ->getQuery()
             ->getOneOrNullResult()
         ;
