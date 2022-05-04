@@ -75,6 +75,7 @@ class GameRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('g')
             ->join('g.genres', 'gen')
             ->join('g.countries', 'c')
+            ->join('g.comment', 'comment')
             ->where('g.slug = :slug')
             ->setParameter('slug',$slug)
             ->getQuery()
