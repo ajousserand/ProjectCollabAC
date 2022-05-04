@@ -1,13 +1,34 @@
 @import 'variables';
 
-.orange {
-    color: $or_bg;
+.commentContainer {
+
+    background-color: rgba(16, 16, 16, 0.5);
+    border-radius: 20px;
+    width: 220px;
+    padding: 0.5rem;
+
+    h5 {
+        font-size: 1rem;
+    }
+
+    .orange {
+        color: $or_bg;
+    }
+
+    .tinyFont {
+        font-size: 0.9rem;
+    }
+
+    p {
+        font-size: 0.8rem;
+    }
 }
 
-.commentContainer {
-    background-color: $dg-bg;
-    border-radius: 20px;
+.gameContainer {
+    width: 250px;
 }
+
+
 
 // .sousBanniere {
 //     background-color: $or_bg;
