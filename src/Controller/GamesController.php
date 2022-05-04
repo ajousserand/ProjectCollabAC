@@ -22,11 +22,9 @@ class GamesController extends AbstractController
                 'gameEntities' => $gameEntities
             ]);
         }
-
         $game = $this->gameRepository->getGameBySlug($slug);
         return $this->render('game_detail/index.html.twig', [
             'gameDetail' => $game,
-
         ]);
     }
 }
