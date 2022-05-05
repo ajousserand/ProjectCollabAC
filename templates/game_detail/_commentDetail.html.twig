@@ -1,6 +1,6 @@
 <div class="commentContainer">
 
     <a href="{{path('st_games', {slug:comment.game.slug})}}"><h5 class="orange link"> {{comment.game.name}}</h5><a>
-    <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} par <a class="orange link" href="{{path('st_user', {name:comment.account.name})}}"> {{comment.account.nickname}}</a></p>
+    <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} par <a class="orange link" href="{{path('st_user_show', {name:comment.account.name})}}"> {{comment.account.nickname}}</a></p>
     <p>{{comment.content}}</p>
 </div>
