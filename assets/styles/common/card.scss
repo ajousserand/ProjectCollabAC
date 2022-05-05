@@ -7,13 +7,16 @@
     &:hover {
         transform: scale(1.05);
         pointer-events: auto;
-        color: $or_bg;
     }
 }
 
 a {
     text-decoration: none;
     color: white;
+
+    &:hover {
+        color: $or_bg;
+    }
 }
 
 
