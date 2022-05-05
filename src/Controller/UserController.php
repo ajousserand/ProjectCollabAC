@@ -16,22 +16,14 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/{name}', name: 'st_user')]
-    public function index(string $name): Response
+    #[Route('/{name}', name: 'st_user_show')]
+    public function show(string $name): Response
     {
-        function getGameTime($time)
-        {
-            return round($time / 3600, 1);
-        }
-
-        if ($name) {
-            $userEntity = $this->accountRepository->getAccountByName($name);
-            // dd($this->accountRepository->getAccountByName($name));
-            return $this->render('user/index.html.twig', [
-                'controller_name' => 'UserController',
-                'user' =>  $userEntity,
-            ]);
-        }
-        return 'Pas de compte correspondant à ce pseudo';
+        $userEntity = $this->accountRepository->getAccountByName($name);
+        // dd($this->accountRepository->getAccountByName($name));
+        return $this->render('user/show.html.twig', [
+            'user' =>  $userEntity,
+            'library' => true,
+        ]);
     }
 }

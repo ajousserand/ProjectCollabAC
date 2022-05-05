@@ -1,13 +1,32 @@
-<a href="{{ path('st_games', {slug:game.slug}) }}">
+{# On affiche un lien en fonction de la page affiché #}
+<a {% if library is defined %} href="{{ path('st_games', {slug:library.game.slug}) }}"  {% else %} href="{{ path('st_games', {slug:game.slug}) }}" {% endif %}>
     <div class="cardContainer">
         <div class="imageContainer">
+        {# De même pour les images #}
+            {% if library is defined %}
+            <img src="{{library.game.thumbnailCover}}">
+            {% else %}
             <img src="{{game.thumbnailCover}}">
+            {% endif %}   
         </div>
+        {# On enlève le prix si on est sur la page user #}
+        {% if library is not defined %}
         <div class="reductionContainer">
-            <p>{{game.price}}€</p>
+            <p>{{game.price}}€</p> 
         </div>
+        {% endif %}
     </div>
+    {% if library is not defined %}
     <p class="text-center mt-2">{{game.name}}</p>
+    {% endif %}
+    {# Si on se trouve dans la librairie, on affiche les détails #}
+    {% if library is defined %}
+        <div class="infoUserGameContainer text-center">
+            <p class="mb-0">{{library.game.name}}</p>
+            <p class="mb-0">Temp de jeu: {{library.timeConverter }}</p>
+            <p>Dernière partie le {{library.lastUsedAt | date('d/m/Y')}}</p>
+        </div>
+    {% endif %}
 </a>
     
     
