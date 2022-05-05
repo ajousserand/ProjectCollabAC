@@ -14,21 +14,25 @@
         </div>
         <div class="col-lg-6 bg-secondary border border-3 border-dark rounded-3 ">
             <div class="imageContainer">
-                <div class="row d-flex justify-content-around mt-5 mb-5 ">
-                    {% for genre in gameDetail.genres %}
-                            <div class="col-lg-1 mx-5">
-                                <h3>{{genre.name}}</h3>
-                            </div>
-                    {% endfor %}
-                </div>
-                <p class="px-2">{{gameDetail.description}}</p>
+                
+                <p class="px-2 mt-5">{{gameDetail.description}}</p>
                     
-                <div class="row d-flex justify-content-center">
-                <h3 class="text-center mt-5 mb-5">Langue : </h3>
+                <div class="row d-flex justify-content-center mt-5">
                     {% for country in gameDetail.countries %}
                         <div class="col-lg-1">
                         <img src="{{country.urlFlag}}">
                         </div>
+                    {% endfor %}
+                </div>
+                <div class="row mt-5 mb-5 ">
+                    {% for genre in gameDetail.genres %}
+                            <div class="col-lg-3 ">
+                                <a href="">
+                                    <button class="btn btn-warning">
+                                        <h3>{{genre.name}}</h3>
+                                    </button>
+                                </a>
+                            </div>
                     {% endfor %}
                 </div>
                     
@@ -38,7 +42,10 @@
         </div>
 
     </div>
-    <h2 class="text-center mt-5 mb-5">Commentaires </h2>
+    <div class ="d-flex justify-content-around">
+        <h2 class="text-center mt-5 mb-5">Commentaires </h2>
+        <button class="btn btn-warning">Voir tout</button>
+    </div>
     <div class="row d-flex justify-content-center">
             
                     {% for comment in gameDetail.comments|slice(0,6) %}
