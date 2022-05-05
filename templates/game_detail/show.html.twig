@@ -27,13 +27,9 @@
                 <div class="row mt-5 mb-5">
                     {% for genre in gameDetail.genres %}
                             <div class="col-lg-1 ">
-                                
-                                    
-                                        <button class=" btn btn-warning">
-                                            {{genre.name}}
-                                        </button>
-                                    
-                                
+                                <button class=" btn btn-warning">
+                                    {{genre.name}}
+                                </button>   
                             </div>
                     {% endfor %}
                 </div>
@@ -52,7 +48,7 @@
             
                     {% for comment in gameDetail.comments|slice(0,6) %}
                         <div class="col-lg-12 mt-3 mb-3">
-                            {% include 'game_detail/_commentDetail.html.twig' %}
+                            {% include 'home/_comment.html.twig' %}
                         </div>
                     {% endfor %}
             </div>
