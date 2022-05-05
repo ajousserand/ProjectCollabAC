@@ -27,7 +27,8 @@ class GamesController extends AbstractController
         $relatedGame = $this->gameRepository->getRelatedGames($game);
         return $this->render('game_detail/show.html.twig', [
             'gameDetail' => $game,
-            'relatedGame'=> $relatedGame
+            'relatedGame'=> $relatedGame,
+            
         ]);
     }
 
@@ -43,6 +44,16 @@ class GamesController extends AbstractController
 
     #[Route('/jeux/langue/{slug}', name: 'st_games_langue')]
     public function indexLangue(string $slug ): Response
+    {
+        $gamePerLangue = $this->gameRepository->getLangueBySlug($slug);
+        return $this->render('langue/index.html.twig', [
+            'gameDetail' => $gamePerLangue,
+            'slug' => $slug
+        ]);
+    }
+
+    #[Route('/jeux/langue/{slug}/commentaires', name: 'st_games_comments')]
+    public function indexComments(string $slug ): Response
     {
         $gamePerLangue = $this->gameRepository->getLangueBySlug($slug);
         return $this->render('langue/index.html.twig', [
