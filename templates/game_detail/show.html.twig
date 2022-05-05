@@ -20,16 +20,18 @@
                 <div class="row d-flex justify-content-center mt-5">
                     {% for country in gameDetail.countries %}
                         <div class="col-lg-1">
-                        <img src="{{country.urlFlag}}">
+                        <a href="{{path('st_games_langue',{slug : country.slug})}}"><img src="{{country.urlFlag}}"></a>
                         </div>
                     {% endfor %}
                 </div>
                 <div class="row mt-5 mb-5">
                     {% for genre in gameDetail.genres %}
                             <div class="col-lg-1 ">
-                                <button class="btn btn-warning">
-                                    {{genre.name}}
-                                </button>
+                                <a href="{{path('st_games_genre',{slug : genre.slug})}}">
+                                    <button class="btn btn-warning">
+                                        {{genre.name}}
+                                    </button>
+                                </a>
                             </div>
                     {% endfor %}
                 </div>

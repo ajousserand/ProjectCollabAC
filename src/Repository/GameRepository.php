@@ -96,8 +96,36 @@ class GameRepository extends ServiceEntityRepository
             ->setParameter('slug',$slug)
             ->orderBy('comment.createdAt', 'DESC')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
+    }
+
+    public function getLangueBySlug(string $slug) {
+       
+        return $this->createQueryBuilder('g')
+            ->select('g','comment', 'c', 'gen')
+            ->join('g.genres', 'gen')
+            ->join('g.countries', 'c')
+            ->join('g.comments', 'comment')
+            ->where('c.slug = :slug')
+            ->setParameter('slug',$slug)
+            ->orderBy('comment.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getRelatedGames(Game $game){
+        return $this->createQueryBuilder('g')
+        ->select('g')
+        ->join('g.genres', 'gen')
+        ->where('genres IN(:genres)')
+        ->setParameter('genres', $game->getGenres())
+        ->andWhere('g != :currentGame')
+        ->setParameter('currentGame', $game)
+        ->orderBy('g.publishedAt','DESC')
+        ->getQuery()
+        ->getResult();
     }
 
   
