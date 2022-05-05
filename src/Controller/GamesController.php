@@ -23,7 +23,7 @@ class GamesController extends AbstractController
             ]);
         }
         $game = $this->gameRepository->getGameBySlug($slug);
-        return $this->render('game_detail/index.html.twig', [
+        return $this->render('game_detail/show.html.twig', [
             'gameDetail' => $game,
         ]);
     }
