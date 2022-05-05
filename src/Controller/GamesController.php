@@ -40,6 +40,7 @@ class GamesController extends AbstractController
         // }
         return $this->render('genre/index.html.twig', [
             'gameDetail' => $gamePerGenre,
+            'slug' => $slug
         ]);
     }
 }

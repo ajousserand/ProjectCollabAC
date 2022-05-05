@@ -96,7 +96,7 @@ class GameRepository extends ServiceEntityRepository
             ->setParameter('slug',$slug)
             ->orderBy('comment.createdAt', 'DESC')
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 

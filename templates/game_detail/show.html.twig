@@ -27,9 +27,11 @@
                 <div class="row mt-5 mb-5">
                     {% for genre in gameDetail.genres %}
                             <div class="col-lg-1 ">
-                                <button class="btn btn-warning">
-                                    {{genre.name}}
-                                </button>
+                                <a href="{{path('st_games_genre',{slug : genre.slug})}}">
+                                    <button class="btn btn-warning">
+                                        {{genre.name}}
+                                    </button>
+                                </a>
                             </div>
                     {% endfor %}
                 </div>
