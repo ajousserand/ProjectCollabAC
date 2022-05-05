@@ -21,7 +21,7 @@ class PublisherController extends AbstractController
     #[Route('/{slug}', path: 'app_publisher_show')]
     public function show(PublisherRepository $publisherRepository, $slug)
     {
-        $publisherEntity = $this->$publisherRepository->getPublisherOne($slug);
+        $publisherEntity = $publisherRepository->getPublisherOne($slug);
         $nbGames = count($publisherEntity->getGames());
 
         return $this->render('publisher/show.html.twig', [
