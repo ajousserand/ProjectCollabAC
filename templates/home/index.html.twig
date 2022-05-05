@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Page d'accueil
+    {{'home.title'|trans}}
 {% endblock %}
 
 
 {% block body %}
 
 <div class="container">
-    <h2 class="my-5"> Nos derniers jeux : </h2>  
+    <h2 class="my-5"> {{'home.menu.last_published'|trans}} </h2>  
     <div class="row"> 
         {% for game in lastPublishedGames  %}
             <div class="col-lg-4 px-5">            
@@ -22,7 +22,7 @@
 
 <div class="dark mt-5">
     <div class="container py-5">
-        <h2 class="mb-5"> Les plus joués : </h2>
+        <h2 class="mb-5"> {{'home.menu.most_played'|trans}} </h2>
         <div class="row">
             {% for game in mostGamePlayed  %}
                 <div class="col-lg-4 px-5">            
@@ -36,7 +36,7 @@
 </div>
 
 <div class="container pt-5">
-    <h2 class="mb-5"> Les derniers avis : </h2>
+    <h2 class="mb-5"> {{'home.menu.last_comments'|trans}} </h2>
     <div class="row">
         {% for comment in lastComments  %}
             <div class="homeComments col-lg-3 px-3">
@@ -49,7 +49,7 @@
 
 <div class="dark mt-5">
     <div class="container pt-5">
-        <h2 class="mb-5"> Top des ventes : </h2>
+        <h2 class="mb-5"> {{'home.menu.most_bought'|trans}} </h2>
         <div class="row">
             {% for game in mostBoughtGame  %}
                 <div class="col-lg-4 px-5">            

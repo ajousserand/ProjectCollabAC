@@ -1,0 +1,13 @@
+
+home:
+  title: 'SteamIsh'
+  menu:
+    publishers: 'Les éditeurs'
+    games: 'Les jeux'
+    last_published: 'Les dernières sorties'
+    last_comments: 'Les derniers commentaires'
+    most_played: 'Les plus joués'
+    most_bought: 'Les plus achetés'
+    comment:
+      writted_by: 'Par %name%'
+      writted_on: 'Le %date%'
