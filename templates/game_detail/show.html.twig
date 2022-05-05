@@ -35,7 +35,13 @@
                             </div>
                     {% endfor %}
                 </div>
-                    
+                <div class="EditeurDiv my-3">
+                {% if gameDetail.publisher %}
+                    <p> <a href="{{ path('app_publisher_show', {slug:gameDetail.publisher.slug})}}"> Editeur: {{gameDetail.publisher.name}} </a></p>
+                {% else %}
+                    <p> Editeur inconnu</p>
+                {% endif %}
+                </div
 
             
             

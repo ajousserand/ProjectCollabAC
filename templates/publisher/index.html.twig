@@ -25,10 +25,10 @@
                     <img src="{{ publisher.country.urlFlag }}">
                 </div>
                 <div class="col-lg-4">
-                    {{ publisher.name }}
+                    <a href="{{path('app_publisher_show', {slug:publisher.slug}) }}">{{ publisher.name }}</a>
                 </div>
                 <div class="col-lg-4">
-                    {{ publisher.website }}
+                    <a href="{{publisher.website}}" target="_blank">{{ publisher.website }}</a>
                 </div>
                 <div class="col-lg-3">
                     {{ publisher.games|length }}

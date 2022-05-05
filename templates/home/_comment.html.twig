@@ -6,7 +6,7 @@
             {{comment.account.nickname}}</a>
         {% endif %}      
     </p>
-    {% if library is not defined or game is defined %}
+    {% if library is not defined or game is not defined %}
     <p>{{comment.content|slice(0, 100) ~ '...'}}</p>
     {% else %}
     <p>{{comment.content}}</p>
