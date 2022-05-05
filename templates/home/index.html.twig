@@ -40,7 +40,11 @@
     <div class="row">
         {% for comment in lastComments  %}
             <div class="homeComments col-lg-3 px-3">
-                {% include 'home/_comment.html.twig' %}
+                {% include 'home/_comment.html.twig' with 
+                    {
+                        'shortDisplay': true
+                    }
+                %}
             </div>
         {% endfor %}
     </div>
