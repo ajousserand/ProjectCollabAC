@@ -13,7 +13,7 @@
             
         </div>
         <div class="col-lg-6 bg-secondary border border-3 border-dark rounded-3 ">
-            <div class="imageContainer">
+            
                 
                 <p class="px-2 mt-5">{{gameDetail.description}}</p>
                     
@@ -24,26 +24,28 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="row mt-5 mb-5 ">
+                <div class="row mt-5 mb-5">
                     {% for genre in gameDetail.genres %}
-                            <div class="col-lg-3 text-center">
-                                <a href="">
-                                    <button class="btn btn-warning">
-                                        <h3>{{genre.name}}</h3>
-                                    </button>
-                                </a>
+                            <div class="col-lg-1 ">
+                                
+                                    
+                                        <button class=" btn btn-warning">
+                                            {{genre.name}}
+                                        </button>
+                                    
+                                
                             </div>
                     {% endfor %}
                 </div>
                     
 
-            </div>
+            
             
         </div>
 
     </div>
-    <div class ="d-flex justify-content-around">
-        <h2 class="text-center mt-5 mb-5">Commentaires </h2>
+    <div class ="mt-5 mb-5 d-flex justify-content-around">
+        <h2 class="text-center ">Commentaires </h2>
         <button class="btn btn-warning">Voir tout</button>
     </div>
     <div class="row d-flex justify-content-center">
