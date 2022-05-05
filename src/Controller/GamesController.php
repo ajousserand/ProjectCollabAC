@@ -17,7 +17,7 @@ class GamesController extends AbstractController
     public function index(string $slug = ""): Response
     {
         $game = $this->gameRepository->getGameBySlug($slug);
-        // $relatedGame = $this->gameRepository->getRelatedGames();
+        $relatedGame = $this->gameRepository->getRelatedGames($game);
         if ($game == null) {
             $gameEntities = $this->gameRepository->findBy([], ['publishedAt' => 'DESC']);
             return $this->render('games/index.html.twig', [
@@ -26,6 +26,7 @@ class GamesController extends AbstractController
         }
         return $this->render('game_detail/show.html.twig', [
             'gameDetail' => $game,
+            'relatedGame'=> $relatedGame
         ]);
     }
 

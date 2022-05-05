@@ -53,6 +53,18 @@
                             {% include 'home/_comment.html.twig' %}
                         </div>
                     {% endfor %}
-            </div>
+    </div>
+
+   <div class="row">
+      {% for game in relatedGame %}
+         <div class="col-3">
+         {% include 'games/cardView.html.twig' %}
+         </div>
+      {% endfor %}
+   </div>
 </div>
+
+
+</div>
+
 {% endblock %}
