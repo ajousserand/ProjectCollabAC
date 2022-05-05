@@ -51,7 +51,7 @@ class PublisherRepository extends ServiceEntityRepository
     }
 
     //Répétition de code!!!
-    public function getPublisherOne($slug): array
+    public function getPublisherOne($slug): Publisher
     {
         return $this->createQueryBuilder('p')
             ->select('p', 'country', 'games')
@@ -61,6 +61,6 @@ class PublisherRepository extends ServiceEntityRepository
             ->where('p.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 }
