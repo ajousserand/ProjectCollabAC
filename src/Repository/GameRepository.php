@@ -85,5 +85,20 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getGenreBySlug(string $slug) {
+       
+        return $this->createQueryBuilder('g')
+            ->select('g','comment', 'c', 'gen')
+            ->join('g.genres', 'gen')
+            ->join('g.countries', 'c')
+            ->join('g.comments', 'comment')
+            ->where('gen.slug = :slug')
+            ->setParameter('slug',$slug)
+            ->orderBy('comment.createdAt', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
   
 }
