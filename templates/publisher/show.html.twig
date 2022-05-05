@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+<div class="container row">
+    <h1>{{publisher.name}}</h1>
+    <p>Pays d'origine: <img src="{{ publisher.country.urlFlag}}"></p>
+    <p> {{nbGames}} jeux</p>
+    <p>{{publisher.website}}</p>
+
+    {% for game in publisher.games %}
+        <div class="col-lg-3">
+            {% include 'games/cardView.html.twig' %}
+        </div>
+    {% endfor %}
+    
+
+</div>
+
+{% endblock %}

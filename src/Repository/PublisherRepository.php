@@ -19,14 +19,16 @@ class PublisherRepository extends ServiceEntityRepository
         parent::__construct($registry, Publisher::class);
     }
 
-    public function add(Publisher $publisher, bool $flush = true): void {
+    public function add(Publisher $publisher, bool $flush = true): void
+    {
         $this->_em->persist($publisher);
         if ($flush) {
             $this->_em->flush();
         }
     }
 
-    public function remove(Publisher $publisher, bool $flush = true): void {
+    public function remove(Publisher $publisher, bool $flush = true): void
+    {
         $this->_em->remove($publisher);
         if ($flush) {
             $this->_em->flush();
@@ -36,17 +38,29 @@ class PublisherRepository extends ServiceEntityRepository
     /**
      * @return Publisher[]
      */
-    public function getPublishersAll(): array {
+    public function getPublishersAll(): array
+    {
         return $this->createQueryBuilder('p')
             ->select('p', 'country', 'games')
             ->join('p.country', 'country')
             ->join('p.games', 'games')
             ->orderBy('p.name')
-//            ->setMaxResults(5)
+            //            ->setMaxResults(5)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
-
+    //Répétition de code!!!
+    public function getPublisherOne($slug): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p', 'country', 'games')
+            ->join('p.country', 'country')
+            ->join('p.games', 'games')
+            ->orderBy('p.name')
+            ->where('p.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getResult();
+    }
 }
