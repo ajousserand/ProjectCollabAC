@@ -73,13 +73,13 @@ class GameRepository extends ServiceEntityRepository
     public function getGameBySlug(string $slug) {
        
         return $this->createQueryBuilder('g')
+            ->select('g','comment', 'c', 'gen')
             ->join('g.genres', 'gen')
             ->join('g.countries', 'c')
             ->join('g.comments', 'comment')
             ->where('g.slug = :slug')
             ->setParameter('slug',$slug)
             ->orderBy('comment.createdAt', 'DESC')
-            ->setMaxResults(6)
             ->getQuery()
             ->getOneOrNullResult()
         ;
