@@ -1,5 +1,14 @@
 <div class="commentContainer">
-    <a href="{{path('st_games', {slug:comment.game.slug})}}"><h5 class="orange link"> {{comment.game.name}}</h5><a>
-    <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}} par <a class="orange link" href="{{path('st_user_show', {name:comment.account.name})}}"> {{comment.account.nickname}}</a></p>
+    <a href="{{path('st_games', {slug:comment.game.slug})}}"><h5 class="orange link py-3"> {{comment.game.name}}</h5><a>
+    <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}}
+        {% if library is not defined %}
+            par <a class="orange link" href="{{path('st_user_show', {name:comment.account.name})}}">
+            {{comment.account.nickname}}</a>
+        {% endif %}      
+    </p>
+    {% if library is not defined or game is defined %}
     <p>{{comment.content|slice(0, 100) ~ '...'}}</p>
+    {% else %}
+    <p>{{comment.content}}</p>
+    {% endif %}
 </div>
