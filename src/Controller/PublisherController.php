@@ -7,13 +7,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/editeurs')]
 class PublisherController extends AbstractController
 {
-    #[Route('/editeur', name: 'app_publisher')]
+    #[Route('/', name: 'app_publisher')]
     public function index(PublisherRepository $publisherRepository): Response
     {
         return $this->render('publisher/index.html.twig', [
-            'publishers' => $publisherRepository->getPublishersAll()
+            'publishers' => $publisherRepository->getPublishersAll(),
+        ]);
+    }
+
+    #[Route('/{slug}', path: 'app_publisher_show')]
+    public function show(PublisherRepository $publisherRepository, $slug)
+    {
+        $publisherEntity = $this->$publisherRepository->getPublisherOne($slug);
+        $nbGames = count($publisherEntity->getGames());
+
+        return $this->render('publisher/show.html.twig', [
+            "publisher" => $publisherEntity,
+            "nbGames" => $nbGames,
         ]);
     }
 }
