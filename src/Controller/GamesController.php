@@ -52,12 +52,13 @@ class GamesController extends AbstractController
         ]);
     }
 
-    #[Route('/jeux/langue/{slug}/commentaires', name: 'st_games_comments')]
+    #[Route('/jeux/{slug}/commentaires', name: 'st_games_comments')]
     public function indexComments(string $slug ): Response
     {
-        $gamePerLangue = $this->gameRepository->getLangueBySlug($slug);
-        return $this->render('langue/index.html.twig', [
-            'gameDetail' => $gamePerLangue,
+        $game= $this->gameRepository->getGameBySlug($slug);
+        
+        return $this->render('comment/index.html.twig', [
+            'gameDetail' => $game,
             'slug' => $slug
         ]);
     }

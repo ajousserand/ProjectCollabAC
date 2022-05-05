@@ -5,15 +5,16 @@
 {% block body %}
 <div class="container mx-auto">
 
-        <h2 class="my-5"> Avis sur {{slug}}</h2>
-      <div class="row d-flex justify-content-center">
+    <h2 class="my-5"> Avis sur {{slug}}</h2>
+    <div class="row d-flex justify-content-center">
             
                     {% for comment in gameDetail.comments %}
                         <div class="col-lg-12 mt-3 mb-3">
                             {% include 'home/_comment.html.twig' with
                             {
-
-                            } %}
+                                hiddenName : true
+                            }
+                             %}
                         </div>
                     {% endfor %}
     </div>
