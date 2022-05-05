@@ -22,7 +22,7 @@
     {# Si on se trouve dans la librairie, on affiche les détails #}
     {% if library is defined %}
         <div class="infoUserGameContainer text-center">
-            <p class="mb-0">{{library.game.name}}</p>
+            <p class="mb-0 mt-2 titreJeu">{{library.game.name}}</p>
             <p class="mb-0">Temp de jeu: {{library.timeConverter }}</p>
             <p>Dernière partie le {{library.lastUsedAt | date('d/m/Y')}}</p>
         </div>

@@ -22,7 +22,7 @@
             {% endfor %}
 
                 <h2 class="py-3">Les avis de {{user.name}}</h2>
-                {% for comment in user.comments %}
+                {% for comment in user.comments | slice(0,4) %}
                     <div class="userComments col-lg-12 px-3 p-3">
                         {% include 'home/_comment.html.twig' %}
                     </div>
