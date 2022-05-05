@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+<div class="container mx-auto">
+
+    {% if user is not null %}
+
+        <div class="infoContainer my-5">
+            <h1> {{user.name}} </h1>
+            <p>Pseudo : {{user.nickname}}</p>
+        </div>
+
+        <h2>Jeux de {{user.name}}</h2>
+        <div class="row">
+            {% for library in user.libraries %}
+                <div class="col-3 py-5">
+                    {% include 'games/cardView.html.twig' %}
+                </div>
+            {% endfor %}
+
+                <h2 class="py-3">Les avis de {{user.name}}</h2>
+                {% for comment in user.comments %}
+                    <div class="userComments col-lg-12 px-3 p-3">
+                        {% include 'home/_comment.html.twig' %}
+                    </div>
+                {% endfor %}
+        </div>
+    
+    {% else %}
+
+        <p>Aucun compte lié à ce profil</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

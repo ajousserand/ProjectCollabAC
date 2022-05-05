@@ -39,16 +39,19 @@ class AccountRepository extends ServiceEntityRepository
         }
     }
 
-    public function getAccountByName(string $name)
+    public function getAccountByName(string $name): ?Account
     {
         // Genre::class, 'genre', ExprJoin::WITH, 'genre.games = g.genres'
         return $this->createQueryBuilder('a')
-            ->select('a')
-            // ->join('account.libraries', 'libraries')
-            // ->join(Game::class, 'game', ExprJoin::WITH, 'account.game = game')
+            ->select('a', 'comment', 'lib', 'g', 'gc')
+            ->join('a.comments', 'comment')
+            ->join('a.libraries', 'lib')
+            ->join('lib.game', 'g')
+            ->join('comment.game', 'gc')
             ->where('a.name = :name')
             ->setParameter('name', $name)
+            ->orderBy('comment.createdAt', 'DESC')
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 }
