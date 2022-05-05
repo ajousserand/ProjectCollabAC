@@ -27,7 +27,8 @@ class GamesController extends AbstractController
         $relatedGame = $this->gameRepository->getRelatedGames($game);
         return $this->render('game_detail/show.html.twig', [
             'gameDetail' => $game,
-            'relatedGame'=> $relatedGame
+            'relatedGame'=> $relatedGame,
+            
         ]);
     }
 
