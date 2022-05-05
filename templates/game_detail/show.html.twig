@@ -56,7 +56,7 @@
     </div>
 
    <div class="row d-flex justify-content-center" >
-      {% for game in relatedGame %}
+      {% for game in relatedGame|slice(0,3) %}
          <div class="col-3">
          {% include 'games/cardView.html.twig' %}
          </div>
