@@ -16,8 +16,7 @@ class UserType extends AbstractType
             ->add('email')
             ->add('nickname')
             ->add('slug')
-            ->add('createdAt')
-        ;
+            ->add('createdAt');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
