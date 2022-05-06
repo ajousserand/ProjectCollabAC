@@ -18,7 +18,7 @@ class FormType extends AbstractType
                 ]
             ])
             ->add('submit',SubmitType::class,[
-                'label'=> '<i class="fa-solid fa-magnifying-glass"></i>',
+                'label'=> 'soumettre',
                 'attr'=>[
                     'class'=> 'btn btn-warning'
                 ]
