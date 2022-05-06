@@ -15,7 +15,6 @@ class UserType extends AbstractType
             ->add('name')
             ->add('email')
             ->add('nickname')
-            ->add('wallet')
             ->add('slug')
             ->add('createdAt')
         ;
