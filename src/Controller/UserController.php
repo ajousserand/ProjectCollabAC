@@ -39,7 +39,7 @@ class UserController extends AbstractController
             $user->setCreatedAt(new DateTime('now'));
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('form/create.html.twig', [
@@ -55,7 +55,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('form/edit.html.twig', [

@@ -18,10 +18,15 @@
           <a class="nav-link text-white" href="{{path('app_publisher')}}">Publishers</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="rechercher" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-      </form>
+      {# <div class=" navbar-left d-flex justify-content-between"> #}
+        <form class="d-flex mx-5">
+          <input class="form-control me-2 pr-3" type="text" placeholder="rechercher" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+        <a href="{{path('app_user_create')}}"><button class="btn btn-warning">
+              Inscription
+          </button></a>
+      {# </div> #}
     </div>
   </div>
 </nav>
