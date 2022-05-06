@@ -20,7 +20,7 @@ class UserController extends AbstractController
     {
     }
 
-    #[Route('/index', path: 'app_user')]
+    #[Route('/', path: 'app_user')]
     public function index()
     {
         return $this->render('user/index.html.twig', [
@@ -28,7 +28,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'app_form_create')]
+    #[Route('/create', name: 'app_user_create')]
     public function create(Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(UserType::class, new Account());
@@ -39,7 +39,7 @@ class UserController extends AbstractController
             $user->setCreatedAt(new DateTime('now'));
             $em->persist($user);
             $em->flush();
-            // return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_user');
         }
 
         return $this->render('form/create.html.twig', [
@@ -47,7 +47,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{name}', name: 'app_form_edit')]
+    #[Route('/edit/{name}', name: 'app_user_edit')]
     public function edit(Account $account, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(UserType::class, $account);
@@ -55,7 +55,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
-            // return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute('app_user');
         }
 
         return $this->render('form/edit.html.twig', [
