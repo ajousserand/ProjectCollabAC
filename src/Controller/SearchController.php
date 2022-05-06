@@ -35,7 +35,7 @@ class SearchController extends AbstractController
             }elseif(count($response)=== 0){
                 return $this->redirectToRoute('st_games');
             }
-            return $this->redirectToroute('app_index_2',['slug'=> $response->getSlug()]);
+            return $this->redirectToroute('app_index_2',['value'=>$value]);
        
            
         }
