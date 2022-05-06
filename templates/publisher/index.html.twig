@@ -6,6 +6,11 @@
 
     <div class="container">
 
+    {% include 'common/_breadcrumb.html.twig' with {
+        'publisher':true
+    } %}
+
+
         <h2 class="my-3">{{'home.menu.publishers'|trans}}</h2>
 
         <table class="table table-dark table-striped my-3 text-center">

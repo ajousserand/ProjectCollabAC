@@ -6,6 +6,12 @@
 
 
 <div class="container">
+
+{% include 'common/_breadcrumb.html.twig' with {
+   'game':true
+} %}
+
+
 <h2 class="my-5">{{'home.menu.games'|trans}}</h2>
    <div class="row">
       {% for game in gameEntities %}

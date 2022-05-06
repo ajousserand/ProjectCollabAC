@@ -8,6 +8,11 @@
 
     <div class="container">
 
+        
+    {% include 'common/_breadcrumb.html.twig' with {
+        'account':true
+    } %}
+
         <table class="table table-dark table-striped my-3">
             <thead class="text-center">
                 <tr>
