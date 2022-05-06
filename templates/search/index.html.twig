@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
 
-{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
-{% block title %}Hello SearchController!{% endblock %}
-
-
-{% block body %}
-
-    <div class="container">
-        {% include "common/form.html.twig" %}
+{{ form_start(formSearch) }}
+    <div class="row me-5">
+        <div class="col-9">
+            {{ form_widget(formSearch.search_value) }}
+        </div>
+        <div class="col-1">
+            <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
     </div>
-    
-{% endblock %}
+{{ form_end(formSearch) }}

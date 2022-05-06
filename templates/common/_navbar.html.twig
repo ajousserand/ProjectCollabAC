@@ -18,19 +18,12 @@
           <a class="nav-link text-white" href="{{path('app_publisher')}}">Publishers</a>
         </li>
       </ul>
-        <form class="d-flex mx-5">
-          <input class="form-control me-2 pr-3" type="text" placeholder="rechercher" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
+        {{
+        render(controller('App\\Controller\\SearchController::searchBar'))
+    }}
         <a href="{{path('app_user_create')}}"><button class="btn btn-warning">
               Inscription
           </button></a>
-        {# Searchbar anthony #}
-        {# <div class="d-flex">
-          <form class="d-flex">
-            {{% include('common/form.html.twig') %}}
-          </form>
-        </div> #}
     </div>
   </div>
 </nav>

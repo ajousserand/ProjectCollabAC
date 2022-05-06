@@ -12,7 +12,7 @@ class FormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('search',TextType::class,[
+            ->add('search_value',TextType::class,[
                 'label'=>false,
                 'required'=>false,
                 'attr' =>[

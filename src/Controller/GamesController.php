@@ -63,22 +63,12 @@ class GamesController extends AbstractController
         ]);
     }
 
-    #[Route('/jeux/rechercher/{slug}', name: 'app_index_2')]
-    public function index2($slug)
+    #[Route('/jeux/rechercher/{value}', name: 'app_index_2')]
+    public function index2($value)
     {
-        $game = $this->gameRepository->getGameBySlug($slug);
-
-        if ($game == null) {
-            $gameEntities = $this->gameRepository->findBy([], ['publishedAt' => 'DESC']);
-            return $this->render('games/index.html.twig', [
-                'gameEntities' => $gameEntities
-            ]);
-        }
-        $relatedGame = $this->gameRepository->getRelatedGames($game);
-        return $this->render('game_detail/show.html.twig', [
-            'gameDetail' => $game,
-            'relatedGame' => $relatedGame,
-
+        $response = $this->gameRepository->getGameWithSearch($value);
+        return $this->render('games/index.html.twig', [
+            'gameEntities' => $response
         ]);
     }
 }
