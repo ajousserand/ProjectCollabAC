@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="text-center mt-5 mb-5">{{gameDetail.name}}</h1>
+    <h1 class="text-center my-5">{{gameDetail.name}}</h1>
     <div class="row">
         <div class="col-lg-6">
             <div class="thumbContainer px-5">
@@ -12,57 +12,65 @@
             </div>
             
         </div>
-        <div class="col-lg-6 bg-secondary border border-3 border-dark rounded-3 ">
-            
-                
-                <p class="px-2 mt-5">{{gameDetail.description}}</p>
-                    
-                <div class="row d-flex justify-content-center mt-5">
-                    {% for country in gameDetail.countries %}
-                        <div class="col-lg-1">
-                        <a href="{{path('st_games_langue',{slug : country.slug})}}"><img src="{{country.urlFlag}}"></a>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="row mt-5 mb-5">
+        <div class="col-lg-6 gameDetailsContainer py-3 px-5 ">
+
+                <table class=" w-50 tableGenre my-3">
+                    <tr>
                     {% for genre in gameDetail.genres %}
-                            <div class="col-lg-1 ">
+                            <td>
                                 <a href="{{path('st_games_genre',{slug : genre.slug})}}">
                                     <button class="btn btn-warning">
                                         {{genre.name}}
                                     </button>
                                 </a>
-                            </div>
+                            </td>
                     {% endfor %}
-                </div>
-                <div class="EditeurDiv my-3">
-                {% if gameDetail.publisher %}
-                    <p> <a href="{{ path('app_publisher_show', {slug:gameDetail.publisher.slug})}}"> Editeur: {{gameDetail.publisher.name}} </a></p>
-                {% else %}
-                    <p> Editeur inconnu</p>
-                {% endif %}
-                </div> 
-        </div>
-
-    </div>
-    <div class ="mt-5 mb-5 d-flex justify-content-around">
-        <h2 class="text-center ">Commentaires </h2>
-        <a href="{{path('st_games_comments',{slug:gameDetail.slug})}}"><button class="btn btn-warning">Voir tout</button></a>
-    </div>
-    <div class="row d-flex justify-content-center">
-            
-                    {% for comment in gameDetail.comments|slice(0,6) %}
-                        <div class="col-lg-12 mt-3 mb-3">
-                            {% include 'home/_comment.html.twig' with
-                            {
-                                'hiddenName' : true,
-                            } %}
+                    <tr>
+                </table>
+                
+                <p class="description">{{gameDetail.description}}</p>
+                    
+                <div class="flagPublisher row my-4">
+                    {% for country in gameDetail.countries %}
+                        <div class="col-lg-1">
+                        <a href="{{path('st_games_langue',{slug : country.slug})}}"><img src="{{country.urlFlag}}"></a>
                         </div>
                     {% endfor %}
+
+                    <div class="EditeurDiv my-3">
+                        {% if gameDetail.publisher %}
+                            <p> <a href="{{ path('app_publisher_show', {slug:gameDetail.publisher.slug})}}"> Editeur: {{gameDetail.publisher.name}} </a></p>
+                        {% else %}
+                            <p> Editeur inconnu</p>
+                        {% endif %}
+                    </div> 
+
+                </div>
+                
+        </div>
+    </div>
+
+
+    <div class="row d-flex justify-content-center mt-5 pt-5">
+
+    <h2 class="mb-5">Commentaires : </h2>
+
+        {% for comment in gameDetail.comments|slice(0,6) %}
+            <div class="col-lg-12 mt-3 mb-3">
+                {% include 'home/_comment.html.twig' with
+                {
+                    'hiddenName' : true,
+                } %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class ="mt-5 mb-5 d-flex justify-content-around">
+        <a href="{{path('st_games_comments',{slug:gameDetail.slug})}}"><button class="btn btn-warning">Voir tout les commentaires</button></a>
     </div>
 
    <div class="row d-flex justify-content-center" >
-    <h2 class="my-3">Jeux similaires </h2>
+    <h2 class="my-5">Jeux similaires : </h2>
       {% for game in relatedGame|slice(0,3) %}
          <div class="col-3">
          {% include 'games/cardView.html.twig' %}
@@ -70,7 +78,6 @@
       {% endfor %}
    </div>
 </div>
-
 
 </div>
 
