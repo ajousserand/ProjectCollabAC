@@ -1,0 +1,32 @@
+
+<div class="my-3">
+    {% if home is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+    </nav>
+    {% elseif game is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Jeux</li>
+    </ol>
+    </nav>
+    {% elseif account is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Account</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+    </nav>
+    {% elseif publisher is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Publisher</a></li>
+    </ol>
+    </nav>
+    {% endif %}
+</div>

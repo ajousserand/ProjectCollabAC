@@ -7,6 +7,10 @@
 
 {% block body %}
 
+{% include 'common/_breadcrumb.html.twig' with {
+    'home':true
+} %}
+
 <div class="container">
     <h2 class="my-5"> {{'home.menu.last_published'|trans}} </h2>  
     <div class="row"> 
