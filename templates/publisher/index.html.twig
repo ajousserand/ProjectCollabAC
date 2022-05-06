@@ -5,18 +5,18 @@
 {% block body %}
 
     <div class="container">
-        <h2>Les éditeurs</h2>
+        <h2>{{'home.menu.publishers'|trans}}</h2>
         <div class="row mx-auto">
             <div class="col-lg-1">
             </div>
             <div class="col-lg-4">
-                <h3>Nom</h3>
+                <h3>{{'home.menu.name'|trans}}</h3>
             </div>
             <div class="col-lg-4">
-                <h3>Site Web</h3>
+                <h3>{{'home.menu.website'|trans}}</h3>
             </div>
             <div class="col-lg-3">
-                <h3>Nb jeux</h3>
+                <h3>{{'home.menu.nbGame'|trans}}</h3>
             </div>
         </div>
         {% for publisher in publishers %}
