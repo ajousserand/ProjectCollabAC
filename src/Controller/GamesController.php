@@ -68,7 +68,9 @@ class GamesController extends AbstractController
     {
         $response = $this->gameRepository->getGameWithSearch($value);
         return $this->render('games/index.html.twig', [
-            'gameEntities' => $response
+            'gameEntities' => $response,
+            'search'=>true,
+            'value'=>$value
         ]);
     }
 }

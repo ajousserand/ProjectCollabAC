@@ -8,6 +8,11 @@
 
     {% if user is not null %}
 
+    {% include 'common/_breadcrumb.html.twig' with {
+        'isAccount':true,
+        'show': true
+    } %}
+
         <div class="infoContainer my-5">
             <h1> {{user.name}} </h1>
             <p>Pseudo : {{user.nickname}}</p>

@@ -1,49 +1,84 @@
 
-<div class="my-3 breadCrumbDiv">
+<div class="my-5 breadCrumbDiv">
     {% if home is defined %}
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Home</li>
     </ol>
     </nav>
+    {% elseif create is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Inscription</li>
+    </ol>
+    </nav>
     {% elseif game is defined %}
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Jeux</li>
-        {% if show is defined %}
+        <li class="breadcrumb-item"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item {% if show == false %} active {% endif %}" aria-current="page"><a href="{{path('st_games')}}">Jeux</a></li>
+        {% if show == true %}
         <li class="breadcrumb-item active" aria-current="page">{{gameDetail.name}}</li>
+        {% elseif search is defined %}
+        <li class="breadcrumb-item active" aria-current="page">Recherche : "{{value}}"</li>
         {% endif %}
     </ol>
     </nav>
-    {% elseif account is defined %}
+    {% elseif isAccount is defined %}
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Account</a></li>
-        {% if show is defined %}
-        <li class="breadcrumb-item active" aria-current="page">{{account.name}}</li>
+        <li class="breadcrumb-item"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item {% if show == false %} active {% endif %}"><a href="{{path('app_user')}}">Utilisateurs</a></li>
+        {% if show == true %}
+        <li class="breadcrumb-item active" aria-current="page">{{user.name}}</li>
         {% endif %}
     </ol>
     </nav>
-    {% elseif publisher is defined %}
+    {% elseif edit is defined %}
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Publisher</a></li>
-        {% if show is defined %}
+        <li class="breadcrumb-item" aria-current="page"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{path('app_user')}}">Utilisateurs</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{{ path('st_user_show', {name:user.name}) }}">{{user.name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Editer les informations</li>
+    </ol>
+    </nav>
+    {% elseif isPublisher is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item {% if show == false %} active {% endif %}"><a href="{{path('app_publisher')}}">Editeurs</a></li>
+        {% if show == true %}
         <li class="breadcrumb-item active" aria-current="page">{{publisher.name}}</li>
         {% endif %}
     </ol>
     </nav>
-    {% elseif genre is defined %}
+    {% elseif isGenre is defined %}
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Genre</a></li>
-        {% if show is defined %}
-        <li class="breadcrumb-item active" aria-current="page">{{genre.name}}</li>
+        <li class="breadcrumb-item"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item {% if show == false %} active {% endif %}"><a href="{{path('st_games')}}">Jeux</a></li>
+        {% if show == true %}
+        <li class="breadcrumb-item active" aria-current="page">Genre : {{slug}}</li>
         {% endif %}
+    </ol>
+    {% elseif isCountry is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item {% if show == false %} active {% endif %}"><a href="{{path('st_games')}}">Jeux</a></li>
+        {% if show == true %}
+        <li class="breadcrumb-item active" aria-current="page">Langues : {{slug}}</li>
+        {% endif %}
+    </ol>
+      {% elseif isComments is defined %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{path('app_home')}}">Home</a></li>
+        <li class="breadcrumb-item {% if show == false %} active {% endif %}"><a href="{{path('st_games')}}">Jeux</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> <a href="{{ path('st_games', {slug:gameDetail.slug}) }}"> {{gameDetail.name}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> Avis</li>
     </ol>
     </nav>
     {% endif %}

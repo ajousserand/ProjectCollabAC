@@ -5,6 +5,11 @@
 {% block body %}
 <div class="container mx-auto">
 
+     {% include 'common/_breadcrumb.html.twig' with {
+        'isComments':true,
+        'show':false
+    } %}
+
     <h2 class="my-5"> Avis sur {{slug}}</h2>
     <div class="row d-flex justify-content-center">
             

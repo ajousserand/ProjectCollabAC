@@ -10,7 +10,8 @@
 
         
     {% include 'common/_breadcrumb.html.twig' with {
-        'account':true
+        'isAccount':true,
+        'show':false
     } %}
 
         <table class="table table-dark table-striped my-3">
@@ -26,7 +27,7 @@
             {% for user in users %}
                 <tr>
                     <td class="py-3">{{user.nickname}}</td>
-                    <td class="py-3">{{user.name}}</td>
+                    <td class="py-3"><a href="{{ path('st_user_show', {name:user.name}) }}">{{user.name}}</a></td>
                     <td class="py-3">{{user.email}}</td>
                     <td class="py-3"> <a href="{{ path('app_user_edit', {name:user.name}) }}"><i class="fa-solid fa-pen"></i></a></td>
                 </tr>  

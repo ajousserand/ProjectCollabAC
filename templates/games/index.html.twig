@@ -7,12 +7,27 @@
 
 <div class="container">
 
-{% include 'common/_breadcrumb.html.twig' with {
-   'game':true
-} %}
+{# Si je viens du controller search, je rajoute search dans les parametre afin davoir la valeur dans le breadcrumb #}
+{% if search is defined %}
+   {% include 'common/_breadcrumb.html.twig' with {
+      'game':true,
+      'search':true,
+      'show':false
+   } %}
+{# Sinon, je met le breadcrumb classique #}
+{% else %}
+   {% include 'common/_breadcrumb.html.twig' with {
+      'game':true,
+      'show':false
+   } %}
+{% endif %}
 
 
+{% if search is defined %}
+<h2 class="my-5">Résultat(s) pour "{{value}}"</h2>
+{% else %}
 <h2 class="my-5">{{'home.menu.games'|trans}}</h2>
+{% endif %}
    <div class="row">
       {% for game in gameEntities %}
          <div class="col-3">

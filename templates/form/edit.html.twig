@@ -6,6 +6,10 @@
 
 {% block body %}
     <div class="container">
+     {% include 'common/_breadcrumb.html.twig' with {
+        'edit':true
+    } %}
+
         <h1>Modification du compte</h1>
         {{ include('common/form.html.twig') }}
     </div>

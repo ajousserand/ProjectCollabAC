@@ -20,7 +20,7 @@ class UserController extends AbstractController
     {
     }
 
-    #[Route('/', path: 'app_user')]
+    #[Route('/', name: 'app_user')]
     public function index()
     {
         return $this->render('user/index.html.twig', [
@@ -60,6 +60,7 @@ class UserController extends AbstractController
 
         return $this->render('form/edit.html.twig', [
             'form' => $form->createView(),
+            'user' => $account
         ]);
     }
 
