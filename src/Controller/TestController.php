@@ -13,22 +13,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class TestController extends AbstractController
 {
     #[Route('/test', name: 'app_test')]
-    public function index(Request $request): Response
+    public function index(): Response
     {
 
-        $publisherEntity = new Publisher;
+        // $publisherEntity = new Publisher;
 
-        $form = $this->createForm(PublisherType::class, $publisherEntity);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $publisherEntity->setCreatedAt( new DateTime('now'));
-            dump($publisherEntity);
-        }
+        // $form = $this->createForm(PublisherType::class, $publisherEntity);
+        // $form->handleRequest($request);
+        // if($form->isSubmitted() && $form->isValid()){
+        //     $publisherEntity->setCreatedAt( new DateTime('now'));
+        //     dump($publisherEntity);
+        // }
 
-        dump($this->getUser());
+        // dump($this->getUser());
+        // return $this->render('test/index.html.twig', [
+        //     'controller_name' => 'TestController',
+        //     'form' => $form->createView(),
+        // ]);
+
+        $user = $this->getUser();
+      
         return $this->render('test/index.html.twig', [
-            'controller_name' => 'TestController',
-            'form' => $form->createView(),
-        ]);
+            'user' => $user]);
     }
 }
