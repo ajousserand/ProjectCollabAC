@@ -1,0 +1,28 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hello ListedGenreController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <table class="table table-dark table-stripped my-3">
+        <thead>
+            <tr>
+                <th>Genre</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for genre in genres %}
+            <tr>
+                <td>{{genre.name}}</td>
+                <td> <i class="fa-solid fa-pen"></i></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-warning my-3" href="{{ path('app_genre_create') }}"> Ajouter un genre</a>
+</div>
+
+{% endblock %}
