@@ -46,8 +46,9 @@ class ListedGenreController extends AbstractController
     }
 
     #[Route('delete-genre', name:'app_genre_delete')]
-    public function delete(){
-        
+    public function delete(Request $request){
+
+        return $this->render('genre');
     }
 
     
