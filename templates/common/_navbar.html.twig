@@ -24,11 +24,25 @@
         {{
         render(controller('App\\Controller\\SearchController::searchBar'))
     }}
-
-        {# {% include "test/index.html.twig" %} #}
-        <a href="{{path('app_user_create')}}"><button class="btn btn-warning">
+    {% if app.user %}
+          <a href="{{path('st_user_show',{name: app.user.name})}}">{{ app.user.name ?? 'connexion' }}</a>
+         
+     <a href="{{path('app_logout')}}"><button class="btn btn-warning">
+              Deconnexion
+          </button></a>
+    {% else %}
+    <a  href="{{path('app_login')}}"><button class="btn btn-warning me-2">
+              Connexion
+          </button></a>
+          
+      <a href="{{path('app_user_create')}}"><button class="btn btn-warning me-2">
               Inscription
           </button></a>
+    {% endif %}
+  
+
+       
+        
     </div>
   </div>
 </nav>
