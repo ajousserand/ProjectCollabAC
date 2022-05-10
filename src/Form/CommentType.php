@@ -19,6 +19,7 @@ class CommentType extends AbstractType
 
             ])
             ->add('note', HiddenType::class,[
+               
                 'attr'=>[
                     'class'=>'note',
                     'data-hidden-note' => 'true'

@@ -9,18 +9,27 @@ window.onload = () => {
             resetStars();
             this.style.color = "red";
 
+            this.classList.add("fa-solid");
+            this.classList.remove("fa-regular");
+
             let previousStar = this.previousElementSibling;
 
             while(previousStar){
                 previousStar.style.color = "red";
+                previousStar.classList.add( "fa-solid");
+                previousStar.classList.remove("fa-regular");
+             
                 previousStar = previousStar.previousElementSibling;
+                
             }
             
         });
 
         star.addEventListener('click', function(){
             /**@ts-ignore */
-            note.value = this.dataset.value;
+            note.value = this.getAttribute('data-value');
+            /**@ts-ignore */
+            resetStars(note.value);
         })
 
         star.addEventListener('mouseout', function(){
@@ -32,13 +41,20 @@ window.onload = () => {
     function resetStars(note = 0){
         
         for( let star of stars){
-            /**@ts-ignore */
-             if(star.dataset.value>note){
+            let valueStar = star.getAttribute('data-value'); 
+             if(parseInt(valueStar) > note){
                 /**@ts-ignore */
+                
                 star.style.color = "grey";
+                star.classList.add( "fa-regular");
+                star.classList.remove("fa-solid");
             }else{
+                console.log(note);
+                console.log(star);
                 /**@ts-ignore */
                  star.style.color = "red";
+                 star.classList.add( "fa-solid");
+                 star.classList.remove("fa-regular");
             }
          }
     }
