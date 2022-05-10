@@ -54,9 +54,15 @@ class GamesController extends AbstractController
         }
         
         if($user){
+<<<<<<< HEAD
             $response = $this->commentRepository->getCommentPerGamePerUser($user,$game);
         }else{
             $response = null;
+=======
+        $response = $this->commentRepository->getCommentPerGamePerUser($user,$game);
+        }else{
+            $response= null;
+>>>>>>> admin
         }
         $relatedGame = $this->gameRepository->getRelatedGames($game);
         return $this->render('game_detail/show.html.twig', [
