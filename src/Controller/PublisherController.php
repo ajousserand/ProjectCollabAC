@@ -7,6 +7,7 @@ use App\Form\PublisherType;
 use App\Repository\PublisherRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,13 +17,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class PublisherController extends AbstractController
 {
 
-    public function __construct(private EntityManagerInterface $em){}
+    public function __construct(private EntityManagerInterface $em,
+                                private PaginatorInterface $paginator){}
 
     #[Route('/', name: 'app_publisher')]
-    public function index(PublisherRepository $publisherRepository, ): Response
+    public function index(PublisherRepository $publisherRepository, Request $request): Response
     {
+        $qb = $publisherRepository->getQbAll();
+        $pagination = $this->paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            15
+        );
+
         return $this->render('publisher/index.html.twig', [
             'publishers' => $publisherRepository->getPublishersAll(),
+            'pagination'=>$pagination
         ]);
     }
 

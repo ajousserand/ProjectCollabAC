@@ -13,3 +13,30 @@ nav {
   }
 
 }
+
+.num_pagination{
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  >div{
+      >span{
+          margin: 0rem 1rem;
+          text-align: center;
+      }
+      >.current{
+          color:$or_bg;
+      }
+      >.first, .previous, .next, .last{
+        background-color:$or_bg;
+        width:30px;
+        height: 30px;
+        border-radius: 5px;
+        font-weight:bold;
+        &:hover{
+          color:black;
+        }
+      }
+  }
+ 
+}

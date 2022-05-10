@@ -30,7 +30,6 @@ class GamesController extends AbstractController
     {
         $game = $this->gameRepository->getGameBySlug($slug);
         $user = $this->getUser();
-    
 
         if ($game == null) {
             $gameEntities = $this->gameRepository->findBy([], ['publishedAt' => 'DESC']);
