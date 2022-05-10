@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Account;
 use App\Entity\Comment;
+use App\Entity\Game;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -45,5 +47,18 @@ class CommentRepository extends ServiceEntityRepository
             ->orderBy('c.createdAt', 'DESC')
             ->setMaxResults(4)
             ->getQuery()->getResult();
+    }
+
+    public function getCommentPerGamePerUser(Account $account, Game $game){
+        return $this->createQueryBuilder('c')
+        ->join('c.game','game')
+        ->join('c.account','account')
+        ->where('game = :game')
+        ->setParameter('game',$game)
+        ->andWhere('account = :account')
+        ->setParameter('account',$account)
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getOneOrNullResult();
     }
 }
