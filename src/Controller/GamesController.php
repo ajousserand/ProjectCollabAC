@@ -35,7 +35,6 @@ class GamesController extends AbstractController
         }
 
         $commentEntity = new Comment;
-
         $form = $this->createForm(CommentType::class, $commentEntity);
         $form->handleRequest($request);
         
@@ -49,7 +48,11 @@ class GamesController extends AbstractController
             $em->flush();
         }
         
-        $response = $this->commentRepository->getCommentPerGamePerUser($user,$game);
+        if($user){
+            $response = $this->commentRepository->getCommentPerGamePerUser($user,$game);
+        }else{
+            $response = null;
+        }
         $relatedGame = $this->gameRepository->getRelatedGames($game);
         return $this->render('game_detail/show.html.twig', [
             'gameDetail' => $game,
