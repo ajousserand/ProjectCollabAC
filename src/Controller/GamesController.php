@@ -2,21 +2,30 @@
 
 namespace App\Controller;
 
+use App\Entity\Account;
+use App\Entity\Comment;
+use App\Form\CommentType;
+use App\Repository\CommentRepository;
 use App\Repository\GameRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GamesController extends AbstractController
 {
-    public function __construct(private GameRepository $gameRepository)
+    public function __construct(private GameRepository $gameRepository, private CommentRepository $commentRepository)
     {
     }
 
     #[Route('/jeux/{slug}', name: 'st_games')]
-    public function index(string $slug = ""): Response
+    public function index(string $slug = "", Request $request, EntityManagerInterface $em): Response
     {
         $game = $this->gameRepository->getGameBySlug($slug);
+        $user = $this->getUser();
+    
 
         if ($game == null) {
             $gameEntities = $this->gameRepository->findBy([], ['publishedAt' => 'DESC']);
@@ -24,10 +33,29 @@ class GamesController extends AbstractController
                 'gameEntities' => $gameEntities
             ]);
         }
+
+        $commentEntity = new Comment;
+
+        $form = $this->createForm(CommentType::class, $commentEntity);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+            $commentEntity->setCreatedAt( new DateTime('now'));
+            $commentEntity->setUpVotes(0);
+            $commentEntity->setDownVotes(0);
+            $commentEntity->setAccount($user);
+            $commentEntity->setGame($game);
+            $em->persist($commentEntity);
+            $em->flush();
+        }
+        
+        $response = $this->commentRepository->getCommentPerGamePerUser($user,$game);
         $relatedGame = $this->gameRepository->getRelatedGames($game);
         return $this->render('game_detail/show.html.twig', [
             'gameDetail' => $game,
             'relatedGame' => $relatedGame,
+            'response'=> $response,
+            'formOpti' => $form->createView(),
 
         ]);
     }
