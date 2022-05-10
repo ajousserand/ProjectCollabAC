@@ -32,10 +32,11 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'float')]
     private float $wallet;
 
-    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Library::class)]
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Library::class, cascade:['remove', 'persist'])]
     private Collection $libraries;
 
-    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class)]
+
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: Comment::class, cascade:['remove', 'persist'])]
     private Collection $comments;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]

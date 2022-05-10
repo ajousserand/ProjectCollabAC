@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="container">
+<div class="container">
 
     {% include 'common/_breadcrumb.html.twig' with {
         'isPublisher':true,
@@ -12,31 +12,56 @@
     } %}
 
 
-        <h2 class="my-3">{{'home.menu.publishers'|trans}}</h2>
+    <h2 class="my-3">{{'home.menu.publishers'|trans}}</h2>
 
-        <table class="table table-dark table-striped my-3 text-center">
-            <thead>
-                <tr>
-                    <th class="py-3">Pays d'origine</th>
-                    <th class="py-3">Nom</th>
-                    <th class="py-3">Site</th>
-                    <th class="py-3">Nombre de jeu</th>
-                </tr>
-            </thead>
+    <table class="table table-dark table-striped my-3 text-center">
+        <thead>
+            <tr>
+                <th class="py-3">Pays d'origine</th>
+                <th class="py-3">Nom</th>
+                <th class="py-3">Site</th>
+                <th class="py-3">Nombre de jeu</th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
 
-            <tbody>
-                {% for publisher in publishers %}
-                <tr>
-                    <td class="py-3"> <img src="{{ publisher.country.urlFlag }}"></td>
-                    <td class="py-3"> <a href="{{path('app_publisher_show', {slug:publisher.slug}) }}">{{ publisher.name }}</a></td>
-                    <td class="py-3"> <a href="{{publisher.website}}" target="_blank">{{ publisher.website }}</a>
-                    </td>
-                    <td class="py-3"> {{ publisher.games|length }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
+        <tbody>
+            {% for publisher in publishers %}
+            <tr>
+                <td class="py-3"> <img src="{{ publisher.country.urlFlag }}"></td>
+                <td class="py-3"> <a
+                        href="{{path('app_publisher_show', {slug:publisher.slug}) }}">{{ publisher.name }}</a></td>
+                <td class="py-3"> <a href="{{publisher.website}}" target="_blank">{{ publisher.website }}</a>
+                </td>
+                <td class="py-3"> {{ publisher.games|length }}</td>
+                <td><a href="{{ path('app_publisher_edit', {slug:publisher.slug}) }}"> <i class="fa-solid fa-pen"></i></a> </td>
+                <!-- Button trigger modal -->
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#modal_{{loop.index}}"><i class="fa-solid fa-trash"></i></button></td>
+                <!-- Modal -->
+                <div class="modal fade" id="modal_{{loop.index}}" tabindex="-1" aria-labelledby="modalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body text-dark">
+                                Etes vous sur de vouloir supprimer l'éditeur {{publisher.name}}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                                <a href="{{ path('app_publisher_delete', {slug: publisher.slug}) }}"
+                                    class="btn btn-primary">Oui</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+            {% endfor %}
+        </tbody>
 
-        </table>
+    </table>
 
-    </div>
+    <a href="{{path('app_publisher_create')}}" class="btn btn-warning my-3"> Ajouter un éditeur </a>
+
+</div>
 {% endblock %}

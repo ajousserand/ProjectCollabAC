@@ -1,16 +1,19 @@
-
+{# <a href="{{path('app_user',{slug :app.user.slug})}}">{{ app.user.name ?? 'connexion' }}</a> #}
 
 
 {% extends 'base-front.html.twig' %}
 
 {% block body %}
-<h1>{{pagination.getTotalItemCount}}</h1>
+
+<div class="container">
+    <h1> {{pagination.getTotalItemCount}}</h1>
     {% for account in pagination %}
         <p>{{account.name}}</p>
-        
     {% endfor %}
 
-<div class ="pagination">
-{{knp_pagination_render(pagination)}}
+    <div>
+        {{knp_pagination_render(pagination)}}
+    </div>
 </div>
+
 {% endblock %}

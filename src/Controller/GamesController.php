@@ -101,4 +101,12 @@ class GamesController extends AbstractController
             'value'=>$value
         ]);
     }
+
+    #[Route('/admin/games', path:'app_games_admin')]
+    public function index_admin(){
+
+        return $this->render('games/index_admin.html.twig', [
+            'games'=>$this->gameRepository->findAll(),
+        ]);
+    }
 }
