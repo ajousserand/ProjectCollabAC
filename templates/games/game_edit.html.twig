@@ -1,0 +1,30 @@
+{% extends 'base-front.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+
+    <h1 class="my-4"> Editer un jeu: </h1>
+    <div class="row mx-auto w-100">
+        {{form_start(form)}}
+            <div class="col-lg-6">
+                {{form_row(form.name)}}
+                {{form_row(form.price)}}
+                {{form_row(form.publisher)}}
+                {{form_row(form.publishedAt)}}
+                {{form_row(form.thumbnailCover)}}
+                {{form_row(form.slug)}}
+            </div>  
+            <div class="col-12">
+                {{form_row(form.countries)}}
+                {{form_row(form.genres)}}
+                {{form_row(form.description)}}
+            </div>
+            
+            <button type="submit" class="btn btn-warning my-3">Valider</button>
+            <a href="{{path('app_games_admin')}}" class="btn btn-warning my-3">Retour à la liste</a>
+        {{form_end(form)}}
+    </div>
+</div>
+
+{% endblock %}

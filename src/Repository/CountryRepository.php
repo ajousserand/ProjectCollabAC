@@ -32,4 +32,8 @@ class CountryRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    public function getQbAll(){
+        return $this->createQueryBuilder('a');
+    }
 }

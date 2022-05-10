@@ -139,5 +139,9 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getQbAll(){
+        return $this->createQueryBuilder('g');
+    }
+
   
 }

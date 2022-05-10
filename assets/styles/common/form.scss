@@ -1,0 +1,11 @@
+.checkboxes-template{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  
+    div{
+      margin : 1rem 1rem;
+      min-width: 150px;
+    }
+  }

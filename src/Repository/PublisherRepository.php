@@ -63,4 +63,8 @@ class PublisherRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+    
+    public function getQbAll(){
+        return $this->createQueryBuilder('a');
+    }
 }

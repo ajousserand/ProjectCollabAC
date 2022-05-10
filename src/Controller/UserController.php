@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Repository\AccountRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,15 +17,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
 
-    public function __construct(private AccountRepository $accountRepository, private EntityManagerInterface $em)
+    public function __construct(private AccountRepository $accountRepository, 
+                                private EntityManagerInterface $em,
+                                private PaginatorInterface $paginator)
     {
     }
 
     #[Route('/', name: 'app_user')]
-    public function index()
+    public function index(Request $request)
     {
+        $qb = $this->accountRepository->getQbAll();
+        $pagination = $this->paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            15
+        );
+
         return $this->render('user/index.html.twig', [
             'users' => $this->accountRepository->findAll(),
+            'pagination'=>$pagination,
         ]);
     }
 
