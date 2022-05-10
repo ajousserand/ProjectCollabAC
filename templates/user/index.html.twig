@@ -21,6 +21,7 @@
                     <th class="py-3">Nom</th>
                     <th class="py-3">Email</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody class="text-center">
@@ -30,7 +31,23 @@
                     <td class="py-3"><a href="{{ path('st_user_show', {name:user.name}) }}">{{user.name}}</a></td>
                     <td class="py-3">{{user.email}}</td>
                     <td class="py-3"> <a href="{{ path('app_user_edit', {name:user.name}) }}"><i class="fa-solid fa-pen"></i></a></td>
-                </tr>  
+                   <!-- Button trigger modal -->
+                    <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_{{loop.index}}"><i class="fa-solid fa-trash"></i></button></td>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal_{{loop.index}}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-body text-dark">
+                            Etes vous sur de vouloir supprimer l'utilisateur {{user.name}}?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                            <a href="{{ path('app_user_delete', {name: user.name}) }}" class="btn btn-primary">Oui</a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </tr> 
             {% endfor %}
             </tbody>
         </table>

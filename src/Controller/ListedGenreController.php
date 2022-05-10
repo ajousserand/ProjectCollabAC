@@ -44,6 +44,21 @@ class ListedGenreController extends AbstractController
                 'form'=>$form->createView(),
         ]);
     }
+    
+    #[Route('/edit-genre/{name}', name: 'app_genre_edit')]
+    public function edit(Genre $genre, Request $request){
+
+        $form = $this->createForm(GenreType::class, $genre);
+        $form->handleRequest($request);
+        if( $form->isSubmitted() && $form->isValid()){
+            $this->em->flush();
+            return $this->redirectToRoute('app_genre');
+        }
+
+        return $this->render('genre/genre_edit.html.twig', [
+                'form'=>$form->createView(),
+        ]);
+    }
 
     #[Route('delete-genre/{name}', name:'app_genre_delete')]
     public function delete(Genre $genre, Request $request){
@@ -51,9 +66,6 @@ class ListedGenreController extends AbstractController
             $this->em->remove($genre);
             $this->em->flush();
             return $this->redirectToRoute('app_genre');
-
-        return $this->redirectToRoute('app_genre');
     }
-
     
 }

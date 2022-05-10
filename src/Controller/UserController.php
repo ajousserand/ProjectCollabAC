@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
 
-    public function __construct(private AccountRepository $accountRepository)
+    public function __construct(private AccountRepository $accountRepository, private EntityManagerInterface $em)
     {
     }
 
@@ -68,10 +68,18 @@ class UserController extends AbstractController
     public function show(string $name): Response
     {
         $userEntity = $this->accountRepository->getAccountByName($name);
-        // dd($this->accountRepository->getAccountByName($name));
         return $this->render('user/show.html.twig', [
             'user' =>  $userEntity,
             'library' => true,
         ]);
+    }
+
+    #[Route('/delete/{name}', name:'app_user_delete')]
+    public function delete(Account $account){
+
+        $this->em->remove($account);
+        $this->em->flush();
+
+        return $this->redirectToRoute('app_user');
     }
 }

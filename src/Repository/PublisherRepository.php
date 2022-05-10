@@ -43,9 +43,9 @@ class PublisherRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->select('p', 'country', 'games')
             ->join('p.country', 'country')
-            ->join('p.games', 'games')
+            ->leftJoin('p.games', 'games')
             ->orderBy('p.name')
-            //            ->setMaxResults(5)
+            //->setMaxResults(5)
             ->getQuery()
             ->getResult();
     }

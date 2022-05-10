@@ -17,17 +17,13 @@
         {% for genre in genres %}
             <tr>
                 <td>{{genre.name}}</td>
-                <td> <i class="fa-solid fa-pen"></i></td>
+                <td><a href="{{ path('app_genre_edit', {name:genre.name}) }}"><i class="fa-solid fa-pen"></i></a></td>
                 <!-- Button trigger modal -->
                 <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_{{loop.index}}"><i class="fa-solid fa-trash"></i></button></td>
                 <!-- Modal -->
                 <div class="modal fade" id="modal_{{loop.index}}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                    {# <div class="modal-header">
-                        <h5 class="modal-title" id="modalLabel">Supprimer</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div> #}
                     <div class="modal-body text-dark">
                         Etes vous sur de vouloir supprimer le genre {{genre.name}}?
                     </div>
