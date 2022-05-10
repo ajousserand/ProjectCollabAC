@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,9 +15,14 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content',TextareaType::class,[
+                'label'=> 'Commentaire' ,
 
             ])
-            ->add('note', IntegerType::class,[
+            ->add('note', HiddenType::class,[
+                'attr'=>[
+                    'class'=>'note',
+                    'data-hidden-note' => 'true'
+                ]
                 
             ])
         ;
