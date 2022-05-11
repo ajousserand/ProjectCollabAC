@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Entity\Topic;
 use App\Form\MessageType;
+use App\Form\TopicType;
 use App\Repository\ForumRepository;
 use App\Repository\TopicRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,17 +32,81 @@ class ForumController extends AbstractController
     }
 
     #[Route('/{name}', name: 'app_forum_show')]
-    public function show(string $name): Response
+    public function forum_show(string $name): Response
     {
         $forum = $this->forumRepository->getForum($name);
 
         return $this->render('forum/forum_show.html.twig', [
             'controller_name' => 'ForumController',
-            'forum'=>$forum
+            'forum'=>$forum,
+            'user'=>$this->getUser(),
         ]);
     }
 
-    #[Route('/{name}/{id}', name: 'app_topic_show')]
+
+    ############################# Topic ################################################
+
+    #[Route('/{name}/create-topic', name: 'app_topic_create')]
+    public function topic_create(string $name, Request $request): Response
+    {
+        $forum = $this->forumRepository->getForum($name);
+        $topic = new Topic;
+        $user = $this->getUser();
+
+        $form = $this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $topic->setCreatedAt(new Datetime());
+            $topic->setCreatedBy($user);
+            $topic->setForums($forum);
+            $this->em->persist($topic);
+            $this->em->flush();
+            return $this->redirectToRoute('app_forum_show', ['name'=>$name]);
+        }
+
+        return $this->render('forum/topic_form.html.twig', [
+            'form'=> $form->createView(),
+            'forum'=>$forum,
+            'user'=>$user,
+        ]);
+    }
+
+    #[Route('/{name}/edit-topic/{id}', name: 'app_topic_edit')]
+    public function topic_edit(string $name, Topic $topic, Request $request): Response
+    {
+        $forum = $this->forumRepository->getForum($name);
+        $user = $this->getUser();
+
+
+        $form = $this->createForm(TopicType::class, $topic);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->em->persist($topic);
+            $this->em->flush();
+            return $this->redirectToRoute('app_forum_show', ['name'=>$name]);
+        }
+
+        return $this->render('forum/topic_form.html.twig', [
+            'form'=> $form->createView(),
+            'forum'=>$forum,
+            'user'=>$user,
+        ]);
+    }
+
+
+    #[Route('/{name}/delete-topic/{id}', name: 'app_topic_delete')]
+    public function topic_delete(string $name, Topic $topic): Response
+    {
+        $this->em->remove($topic);
+        $this->em->flush();
+        return $this->redirectToRoute('app_forum_show', ['name'=>$name]);
+    }
+
+
+
+
+
+    #[Route('/{name}/topic/{id}', name: 'app_topic_show')]
     public function topic_show(string $name, string $id, Request $request): Response
     {
 

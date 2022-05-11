@@ -13,10 +13,25 @@
                 <p>Pas de topics sur ce forum pour l'insant...</p>
             {% else %}
                 {% for topic in forum.topics %}
-                    <li><a class="orange" href="{{path('app_topic_show', {name:forum.title, id:topic.id})}}">{{topic.title}}</a></li>
+                    <li>
+                        <a class="orange" href="{{path('app_topic_show', {name:forum.title, id:topic.id})}}">{{topic.title}} - ( {{topic.messages|length}} réponse(s) )</a>
+                        {% if user is not null and user.name == topic.createdBy.name or is_granted('ROLE_ADMIN') %}
+                                <a class="ms-2 me-2" href="{{path('app_topic_edit', {id:topic.id, name:forum.title})}}"><i class="fa-solid fa-pen text-success"></i></a>
+                                <a href="{{path('app_topic_delete', {id:topic.id, name:forum.title})}}"><i class="fa-solid fa-ban text-danger"></i></a>
+                    </li>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
         </div>
+
+        <div class="my-5">
+        {% if app.user %}
+            <a class="btn btn-warning" href="{{path('app_topic_create', {name:forum.title})}}"> Ajouter un topic</a>
+        {% else %}
+            <p> <a href="{{path("app_login")}}" class="text-warning">Connectez-vous</a> ou <a href="{{path("app_register")}}" class="text-warning">Inscrivez-vous</a> pour ajouter un topic</p>
+        {% endif %}
+    </div>
+
 
     </div>
 
