@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
+use App\Form\GameType;
+use App\Repository\GameRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Account;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
-use App\Repository\GameRepository;
 use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,9 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GamesController extends AbstractController
 {
-    public function __construct(private GameRepository $gameRepository, private CommentRepository $commentRepository)
-    {
-    }
+    public function __construct(private GameRepository $gameRepository, 
+                                private PaginatorInterface $paginator,
+                                private EntityManagerInterface $em,
+                                private CommentRepository $commentRepository
+                                ){}
 
     #[Route('/jeux/{slug}', name: 'st_games')]
     public function index(string $slug = "", Request $request, EntityManagerInterface $em): Response
@@ -35,7 +40,6 @@ class GamesController extends AbstractController
         }
 
         $commentEntity = new Comment;
-
         $form = $this->createForm(CommentType::class, $commentEntity);
         $form->handleRequest($request);
         
@@ -104,5 +108,60 @@ class GamesController extends AbstractController
             'search'=>true,
             'value'=>$value
         ]);
+    }
+
+    #[Route('/admin/games', name:'app_games_admin')]
+    public function index_admin(Request $request){
+
+        $qb = $this->gameRepository->getQbAll();
+        $pagination = $this->paginator->paginate(
+            $qb,
+            $request->query->getInt('page', 1),
+            15
+        );
+
+        return $this->render('games/index_admin.html.twig', [
+            'games'=>$this->gameRepository->findAll(),
+            'pagination' => $pagination
+        ]);
+    }
+
+    #[Route('/admin/games/create', name:'app_games_create')]
+    public function create( Request $request){
+        $game = new Game;
+        $form = $this->createForm(GameType::class, $game);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->em->persist($game);
+            $this->em->flush();
+            return $this->redirectToRoute('app_games_admin');
+        }
+
+        return $this->render('games/game_create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/admin/game/edit/{slug}', name:'app_games_edit')]
+    public function edit(Game $game, Request $request){
+
+        $form = $this->createForm(GameType::class, $game);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->em->flush();
+            return $this->redirectToRoute('app_games_admin');
+        }
+
+        return $this->render('games/game_edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/admin/game/delete/{slug}', name:'app_games_delete')]
+    public function delete(Game $game){
+
+            $this->em->remove($game);
+            $this->em->flush();
+            return $this->redirectToRoute('app_games_admin');
     }
 }
