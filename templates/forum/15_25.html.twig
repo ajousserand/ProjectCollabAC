@@ -1,0 +1,17 @@
+{% extends 'base-front.html.twig' %}
+
+{%  block body %}
+
+    <div class="container my-3">
+        <h1>{{forum.title}}</h1>
+
+        <div class="topicContainer my-4">
+            <h3> Les topics: </h3>
+            {% for topic in forum.topics %}
+                <li>{{topic.title}}</li>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{%  endblock %}
