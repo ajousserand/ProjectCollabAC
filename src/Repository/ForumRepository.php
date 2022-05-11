@@ -47,6 +47,15 @@ class ForumRepository extends ServiceEntityRepository
         }
     }
 
+    public function getForum($name){
+        return $this->createQueryBuilder('f')
+        ->where('f.title = :name')
+        ->setParameter('name', $name)
+        ->join('f.topics', 't')
+        ->getQuery()
+        ->getSingleResult();
+    }
+
     // /**
     //  * @return Forum[] Returns an array of Forum objects
     //  */
