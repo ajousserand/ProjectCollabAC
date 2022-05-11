@@ -1,0 +1,33 @@
+{% extends 'base-front.html.twig' %}
+
+{% block body %}
+
+<div class="container my-4">
+    <p>By {{topic.createdBy.nickname}}</p>
+    <h3 class="mb-5">{{topic.title}}</h3>
+
+    {% for message in topic.messages %}
+
+    <div class="messageBlock">
+        <p class="my-4">Response by {{message.createdBy.nickname}}</p>
+
+        <p>{{message.content}}</p>
+
+    </div>
+
+    {% endfor %}
+
+    <div class="my-5">
+        {% if app.user %}
+            {% include 'forum/message_form.html.twig' %}
+        {% else %}
+            <p> <a href="{{path("app_login")}}" class="text-warning">Connectez-vous</a> ou <a href="{{path("app_register")}}" class="text-warning">Inscrivez-vous</a> pour laisser un commentaire</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="{{path('app_forum_show', {name:topic.forums.title})}}" class="btn btn-warning"> Retour </a>
+    </div>
+</div>
+
+{% endblock %}

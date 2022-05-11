@@ -1,0 +1,32 @@
+{% extends 'base-front.html.twig' %}
+
+{%  block body %}
+
+    {% if forum is not null %}
+    <div class="container my-3">
+        <h1>Forum {{forum.title|capitalize}}</h1>
+
+        <div class="topicContainer my-4">
+            <h3 class="my-5"> Les topics: </h3>
+
+            {% if forum.topics is empty %}
+                <p>Pas de topics sur ce forum pour l'insant...</p>
+            {% else %}
+                {% for topic in forum.topics %}
+                    <li><a href="{{path('app_topic_show', {name:forum.title, id:topic.id})}}">{{topic.title}}</a></li>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+    {% else %}
+
+<div class="container my-3">
+    <h1> Pas de forum correspondant à ce nom</h1>
+</div>
+
+
+    {% endif %}
+
+{%  endblock %}

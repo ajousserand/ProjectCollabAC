@@ -51,10 +51,11 @@ class ForumRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('f')
         ->where('f.title = :name')
         ->setParameter('name', $name)
-        ->join('f.topics', 't')
+        ->leftjoin('f.topics', 't')
         ->getQuery()
         ->getSingleResult();
     }
+
 
     // /**
     //  * @return Forum[] Returns an array of Forum objects

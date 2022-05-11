@@ -47,6 +47,17 @@ class TopicRepository extends ServiceEntityRepository
         }
     }
 
+    public function getTopic($id){
+        return $this->createQueryBuilder('t')
+        ->where('t.id = :id')
+        ->setParameter('id', $id)
+        ->leftjoin('t.messages', 'm')
+        ->join('t.forums', 'f')
+        ->leftjoin('m.createdBy', 'a')
+        ->getQuery()
+        ->getSingleResult();
+    }
+
     // /**
     //  * @return Topic[] Returns an array of Topic objects
     //  */
