@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:delete-ban-word',
+    name: 'delete-ban-word',
     description: 'Add a short description for your command',
 )]
 class DeleteBanWordCommand extends Command
@@ -44,10 +44,15 @@ class DeleteBanWordCommand extends Command
             foreach($messageEntities as $messageEntity){
                 foreach($bannedWord as $word){
                     if(strpos($messageEntity->getContent(), $word) !== false){
+                        $messageOwner = $messageEntity->getCreatedBy();
+                        $messageOwner->setNbBanWord(++$messageOwner);
                         $this->em->remove($messageEntity);
+                        $this->em->persist($messageOwner);
+                        
                         $nbMessageDelete += 1;
                         break;
                     }
+                    
                 }
             
             }
