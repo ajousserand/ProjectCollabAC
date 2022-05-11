@@ -1,4 +1,10 @@
 <div class="commentContainer">
+{% if comment.note != null %}
+    {% for i in 1.. comment.note %}
+        <i class="fa-solid fa-star pt-2"></i>
+    {% endfor %}
+{% endif %}
+    
     <a href="{{path('st_games', {slug:comment.game.slug})}}"><h5 class="orange link py-3 {% if hiddenName is defined %}d-none{% endif %} "> {{comment.game.name}}</h5><a>
     <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}}
         {% if library is not defined %}
