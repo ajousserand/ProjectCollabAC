@@ -8,6 +8,10 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CommentType extends AbstractType
 {
@@ -18,11 +22,19 @@ class CommentType extends AbstractType
                 'label'=> 'Commentaire' ,
 
             ])
+
             ->add('note', HiddenType::class,[
+
+                'constraints'=> [
+                    new NotBlank(),
+                    new GreaterThanOrEqual(0),
+                    new LessThanOrEqual(10)
+            ],
+
                
-                'attr'=>[
+                'attr'=> [
                     'class'=>'note',
-                    'data-hidden-note' => 'true'
+                    'data-hidden-note' => 'true',  
                 ]
                 
             ])
