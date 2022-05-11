@@ -35,7 +35,7 @@ class DeleteBanWordCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $nbMessageDelete=0;
-        $bannedWord = ['Pokemon', 'Digimon', 'Barbie', 'FromSoftSuck', 'UbisoftTheBest', 'BethesdaUnderatted'];
+        $bannedWord = ['pokemon', 'digimon', 'barbie', 'FromSoftSuck', 'UbisoftTheBest', 'BethesdaUnderatted'];
         $messageEntities = $this->messageRepository->findAll();
         if($messageEntities === []){
             $output->writeln("Aucun message n'existe dans le forum");
