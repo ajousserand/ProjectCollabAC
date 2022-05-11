@@ -28,11 +28,11 @@
               Forum
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Forum 15-25</a></li>
-              <li><a class="dropdown-item" href="#">PS5</a></li>
-              <li><a class="dropdown-item" href="#">Xbox</a></li>
-              <li><a class="dropdown-item" href="#">Nitendo</a></li>
-              <li><a class="dropdown-item" href="#">PC</a></li>
+              <li><a class="dropdown-item" href="{{path('app_forum_show', {name: '15-25'})}}">Forum 15-25</a></li>
+              <li><a class="dropdown-item" href="{{path('app_forum_show', {name: 'ps5'})}}">PS5</a></li>
+              <li><a class="dropdown-item" href="{{path('app_forum_show', {name: 'xbox'})}}">Xbox</a></li>
+              <li><a class="dropdown-item" href="{{path('app_forum_show', {name: 'nitendo'})}}">Nitendo</a></li>
+              <li><a class="dropdown-item" href="{{path('app_forum_show', {name: 'pc'})}}">PC</a></li>
             </ul>
           </div>
         </li>
