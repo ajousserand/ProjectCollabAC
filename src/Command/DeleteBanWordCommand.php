@@ -45,7 +45,7 @@ class DeleteBanWordCommand extends Command
                 foreach($bannedWord as $word){
                     if(strpos($messageEntity->getContent(), $word) !== false){
                         $messageOwner = $messageEntity->getCreatedBy();
-                        $messageOwner->setNbBanWord(++$messageOwner);
+                        $messageOwner->setNbBanWord(($messageOwner->getNbBanWord())+1);
                         $this->em->remove($messageEntity);
                         $this->em->persist($messageOwner);
                         
