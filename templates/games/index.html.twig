@@ -23,18 +23,28 @@
 {% endif %}
 
 
+  
+      
+   
 {% if search is defined %}
 <h2 class="my-5">Résultat(s) pour "{{value}}"</h2>
 {% else %}
 <h2 class="my-5">{{'home.menu.games'|trans}}</h2>
 {% endif %}
+
+
    <div class="row">
-      {% for game in gameEntities %}
+   {% for game in pagination %}
          <div class="col-3">
          {% include 'games/cardView.html.twig' %}
          </div>
+      
       {% endfor %}
    </div>
-</div>
 
+
+</div>
+<div class="d-flex justify-content-center">
+{{ knp_pagination_render(pagination) }}
+</div>
 {% endblock %}

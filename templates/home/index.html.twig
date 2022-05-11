@@ -13,6 +13,12 @@
         'home':true
     } %}
     
+    {% if app.user and app.user.nbBanWord >= 5 %}
+        <div class="redWarning">
+            <h2 class="text-center text-white p-3">Tu vas recevoir un coup de marteau MArtoni!!!!!!</h2>
+        </div>
+    {% endif %}
+
     <h2 class="my-5"> {{'home.menu.last_published'|trans}} </h2>  
     <div class="row"> 
         {% for game in lastPublishedGames  %}

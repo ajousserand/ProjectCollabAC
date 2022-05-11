@@ -23,6 +23,7 @@ class GamesController extends AbstractController
                                 private PaginatorInterface $paginator,
                                 private EntityManagerInterface $em,
                                 private CommentRepository $commentRepository
+                            
                                 ){}
 
     #[Route('/jeux/{slug}', name: 'st_games')]
@@ -33,8 +34,16 @@ class GamesController extends AbstractController
 
         if ($game == null) {
             $gameEntities = $this->gameRepository->findBy([], ['publishedAt' => 'DESC']);
+
+            $pagination = $this->paginator->paginate(
+                $gameEntities,
+                $request->query->getInt('page', 1),
+                8
+            );
+
             return $this->render('games/index.html.twig', [
-                'gameEntities' => $gameEntities
+                'gameEntities' => $gameEntities,
+                'pagination'=> $pagination
             ]);
         }
 
