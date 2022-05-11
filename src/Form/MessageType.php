@@ -16,7 +16,8 @@ class MessageType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label'=> ' ',
                 'attr'=>[
-                    'placeholder'=>'Laisser un commentaire...'
+                    'placeholder'=>'Message...',
+                    'rows'=>'10'
                 ]
             ])
         ;

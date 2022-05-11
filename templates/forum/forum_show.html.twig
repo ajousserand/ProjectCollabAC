@@ -13,7 +13,7 @@
                 <p>Pas de topics sur ce forum pour l'insant...</p>
             {% else %}
                 {% for topic in forum.topics %}
-                    <li><a href="{{path('app_topic_show', {name:forum.title, id:topic.id})}}">{{topic.title}}</a></li>
+                    <li><a class="orange" href="{{path('app_topic_show', {name:forum.title, id:topic.id})}}">{{topic.title}}</a></li>
                 {% endfor %}
             {% endif %}
         </div>

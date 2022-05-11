@@ -1,0 +1,23 @@
+.messageButtonContainer {
+
+    >a {
+        margin-top:3rem;
+        margin-right:2rem;
+    }
+
+}
+
+.messageBlock{
+    padding:1rem 2rem;
+    background-color: rgb(19, 18, 18, 0.5);
+    border-radius:20px;
+}
+
+.topicContainer{
+    >ul{
+        list-style: none;
+    }
+    >li{
+        margin:1rem 0rem;
+    }
+}
