@@ -18,6 +18,7 @@ class SearchController extends AbstractController
 
     #[Route('/searchBar', name: 'app_search_bar')]
     public function searchBar(Request $request, ): Response {
+        
         $formSearch = $this->createForm(FormType::class);
         $formSearch->handleRequest($request);
 
