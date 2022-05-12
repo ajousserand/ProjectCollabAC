@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -45,6 +46,31 @@ class MessageRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function getTopForumMessage($forum){
+        $date = new DateTime();
+        $date2 = clone $date;
+        $date2->modify('-7 days');
+        return $this->createQueryBuilder('m')
+                ->join('m.topic', 't')
+                ->join('t.forums', 'f')
+                ->where('f.title = :forum')
+                ->andWhere('m.createdAt >= :date2')
+                ->setParameter('forum', $forum)
+                ->setParameter('date2', $date2)
+                ->getQuery()
+                ->getResult();
+    }
+
+    public function getGoldForumMessage($forum){
+        return $this->createQueryBuilder('m')
+                ->join('m.topic', 't')
+                ->join('t.forums', 'f')
+                ->where('f.title = :forum')
+                ->setParameter('forum', $forum)
+                ->getQuery()
+                ->getResult();
     }
 
     // /**

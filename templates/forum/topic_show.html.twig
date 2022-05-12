@@ -2,12 +2,13 @@
 
 {% block body %}
 
-<div class="container my-4">
+{# Si on vient du formulaire d'edition, l'id scroll est ajouté pour activer le script qui emmene en bas de page #}
+<div class="container my-4" {% if formEdit is defined %} id="scroll" {% endif %}>
     
     <h3 >{{topic.title}}</h3>
     <p class="mb-5">By <a href="{{path('st_user_show', {name:topic.createdBy.name})}}"> <span class="orange">{{topic.createdBy.nickname}}</span></a></p>
 
-    
+        {# Si il n'y a pas de messages #}
         {% if topic.messages|length == 0 %}
 
             <p>Aucun message pour le moment...</p>
@@ -16,11 +17,24 @@
 
             {% for message in topic.messages %}
             <div class="messageBlock my-4">
-                <p class="my-4">Response by
-                    <a href="{{path('st_user_show', {name:message.createdBy.name})}}">
-                        <span class="orange">{{message.createdBy.nickname}}<span>
-                    </a>
-                </p>
+                
+                <div class="d-flex justify-content-between w-100">
+                    <p class="my-4">Response by
+                        <a href="{{path('st_user_show', {name:message.createdBy.name})}}">
+                            <span class="orange">{{message.createdBy.nickname}}<span>
+                        </a>
+                    </p>
+                    <p>
+                        {# Si un user est l'auteur du commentaire, il peut modifier #}
+                        {% if user is not null and user.name == message.createdBy.name %}
+                            <a class="ms-2 me-2" href="{{path('app_message_edit', {name:message.topic.forums.title,  topic:message.topic.id, message:message.id})}}"><i class="fa-solid fa-pen text-success"></i></a>
+                        {% endif %}
+                        {# Si un user est l'auteur OU admin du commentaire, il peut supprimer #}
+                        {% if user is not null and user.name == message.createdBy.name or is_granted('ROLE_ADMIN') %}
+                            <a href="{{path('app_message_delete', {name:message.topic.forums.title, topic:message.topic.id, message:message.id})}}"><i class="fa-solid fa-ban text-danger"></i></a>
+                        {% endif %}
+                    </p>
+                </div>
                 <p>Le {{message.createdAt|date('d/m/Y')}}</p>
                 <p>{{message.content}}</p>
             </div>
@@ -29,8 +43,9 @@
         {% endif %}
 
     <div class="my-5">
+        {# Si le user est connecter, il peut laisser un message #}
         {% if app.user %}
-            <h3 class="my-3"> Laissez un commentaire:</h3>
+            <h3 class="my-3">{% if formEdit is defined %}Modifier{% else %}Laissez{% endif %} un commentaire:</h3>
             {% include 'forum/message_form.html.twig' %}
         {% else %}
             <p> <a href="{{path("app_login")}}" class="text-warning">Connectez-vous</a> ou <a href="{{path("app_register")}}" class="text-warning">Inscrivez-vous</a> pour laisser un commentaire</p>
