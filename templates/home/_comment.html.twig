@@ -1,20 +1,20 @@
 <div class="commentContainer">
-{% if comment.note != null %}
+
+    <a href="{{path('st_games', {slug:comment.game.slug})}}"><h5 class="orange link py-3 {% if hiddenName is defined %}d-none{% endif %} "> {{comment.game.name}}</h5><a>
+    {% if comment.note != null %}
     {% for i in 1.. comment.note %}
-        <i class="fa-solid fa-star pt-2"></i>
+        <i class="fa-solid fa-star starColor pb-3"></i>
     {% endfor %}
 {% endif %}
-    
-    <a href="{{path('st_games', {slug:comment.game.slug})}}"><h5 class="orange link py-3 {% if hiddenName is defined %}d-none{% endif %} "> {{comment.game.name}}</h5><a>
-    <p> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}}
+    <p class="pb-3"> le {{comment.createdAt | format_datetime(locale='fr',pattern="dd MMMM YYYY")}}
         {% if library is not defined %}
             par <a class="orange link" href="{{path('st_user_show', {name:comment.account.name})}}">
             {{comment.account.nickname}}</a>
         {% endif %}      
     </p>
     {% if shortDisplay is defined %}
-        <p>{{comment.content|slice(0, 100) ~ '...'}}</p>
+        <p class="pb-3">{{comment.content|slice(0, 100) ~ '...'}}</p>
     {% else %}
-        <p>{{comment.content}}</p>
+        <p class="pb-3">{{comment.content}}</p>
     {% endif %}
 </div>
