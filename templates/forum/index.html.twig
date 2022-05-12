@@ -12,18 +12,19 @@
         {% endfor %}
         </ul>
 
-        <h4>Le top tendances: </h4>
-        <p><a href="{{path('app_forum_show', {name:topForum.title})}}">{{topForum.title|capitalize}}</a> - {{nbMessageTop}} messages</p>
-        <h4>Forum GOLD</h4>
-        <p><a href="{{path('app_forum_show', {name:goldForum.title})}}">{{goldForum.title|capitalize}}</a> - {{nbMessageGold}} messages</p>
-        <h4>En manques d'attention!</h4>
-        <p><a href="{{path('app_forum_show', {name:needAttentionForum.title})}}">{{needAttentionForum.title|capitalize}}</a> - {{nbMessageNA}} messages</p>
+        <div class="my-5">
+            <h4>Le top tendances: </h4>
+            <p><a href="{{path('app_forum_show', {name:topForum.title})}}">{{topForum.title|capitalize}}</a> - {{nbMessageTop}} messages</p>
+            <h4>Forum GOLD</h4>
+            <p><a href="{{path('app_forum_show', {name:goldForum.title})}}">{{goldForum.title|capitalize}}</a> - {{nbMessageGold}} messages</p>
+            <h4>En manques d'attention!</h4>
+            <p class="mb-5"><a href="{{path('app_forum_show', {name:needAttentionForum.title})}}">{{needAttentionForum.title|capitalize}}</a> - {{nbMessageNA}} messages</p>
+        </div>
 
-        <h4 cla="my-5">Felicitation à <a href="{{path('st_user_show', {name:mostActiveUser.name})}}" class="orange"> {{mostActiveUser.nickname|capitalize}}!<a/> </h4>
-        <p> Il est notre utilisateur le plus actif avec {{nbMessageMAU}} messages!</p>
-
-
-
+        <div class="my-5">
+            <h4>Felicitation à <a href="{{path('st_user_show', {name:mostActiveUser.name})}}" class="orange"> {{mostActiveUser.nickname|capitalize}}!<a/> </h4>
+            <p> Il est notre utilisateur le plus actif avec {{nbMessageMAU}} messages!</p>
+        </div>
 
 </div>
 
