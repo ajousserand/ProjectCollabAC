@@ -15,11 +15,13 @@
                 {% for topic in forum.topics %}
                     <li>
                         <a class="orange" href="{{path('app_topic_show', {name:forum.title, id:topic.id})}}">{{topic.title}} - ( {{topic.messages|length}} réponse(s) )</a>
-                        {% if user is not null and user.name == topic.createdBy.name or is_granted('ROLE_ADMIN') %}
+                        {% if user is not null and user.name == topic.createdBy.name %}
                                 <a class="ms-2 me-2" href="{{path('app_topic_edit', {id:topic.id, name:forum.title})}}"><i class="fa-solid fa-pen text-success"></i></a>
-                                <a href="{{path('app_topic_delete', {id:topic.id, name:forum.title})}}"><i class="fa-solid fa-ban text-danger"></i></a>
+                        {% endif %}
+                        {% if user is not null and user.name == topic.createdBy.name or is_granted('ROLE_ADMIN') %}
+                                <a class="ms-2" href="{{path('app_topic_delete', {id:topic.id, name:forum.title})}}"><i class="fa-solid fa-ban text-danger"></i></a>
+                        {% endif %}
                     </li>
-                    {% endif %}
                 {% endfor %}
             {% endif %}
         </div>

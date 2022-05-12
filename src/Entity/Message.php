@@ -23,7 +23,7 @@ class Message
     #[ORM\Column(type: 'text')]
     private $content;
 
-    #[ORM\ManyToOne(targetEntity: Topic::class, inversedBy: 'messages', cascade:['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Topic::class, inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
     private $topic;
 

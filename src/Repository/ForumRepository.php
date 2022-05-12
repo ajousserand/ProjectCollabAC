@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Forum;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -55,6 +56,46 @@ class ForumRepository extends ServiceEntityRepository
         ->getQuery()
         ->getSingleResult();
     }
+
+    public function getTopForumMessage(){
+        $date = new DateTime();
+        $date2 = clone $date;
+        $date2->modify('-7 days');
+        return $this->createQueryBuilder('f')
+        ->addSelect('COUNT(m) as counted')
+        ->innerJoin('f.topics', 't')
+        ->innerJoin('t.messages', 'm')
+        ->where('m.createdAt >= :date2')
+        ->setParameter('date2', $date2)
+        ->orderBy('counted', 'DESC')
+        ->groupBy('f.id')
+        ->setMaxResults(1)
+        ->getQuery()->getOneOrNullResult();
+    }
+
+    public function getGoldForum(){
+        return $this->createQueryBuilder('f')
+        ->addSelect('COUNT(m) as counted')
+        ->innerJoin('f.topics', 't')
+        ->innerJoin('t.messages', 'm')
+        ->orderBy('counted', 'DESC')
+        ->groupBy('f.id')
+        ->setMaxResults(1)
+        ->getQuery()->getOneOrNullResult();
+    }
+
+    public function getNAForum(){
+        return $this->createQueryBuilder('f')
+        ->addSelect('COUNT(m) as counted')
+        ->innerJoin('f.topics', 't')
+        ->innerJoin('t.messages', 'm')
+        ->orderBy('counted', 'ASC')
+        ->groupBy('f.id')
+        ->setMaxResults(1)
+        ->getQuery()->getSingleResult();
+    }
+
+    
 
 
     // /**

@@ -6,7 +6,9 @@ use App\Entity\Message;
 use App\Entity\Topic;
 use App\Form\MessageType;
 use App\Form\TopicType;
+use App\Repository\AccountRepository;
 use App\Repository\ForumRepository;
+use App\Repository\MessageRepository;
 use App\Repository\TopicRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,16 +22,45 @@ use Symfony\Component\Routing\Annotation\Route;
 class ForumController extends AbstractController
 {
     public function __construct(private ForumRepository $forumRepository, 
+                                private AccountRepository $accountRepository,
                                 private TopicRepository $topicRepository,
+                                private MessageRepository $messageRepository,
                                 private EntityManagerInterface $em){}
+
+
+    ########################## Forums ###################################################
+
+    //Index
 
     #[Route('/', name: 'app_forum')]
     public function index(): Response
     {
+        $forumEntities = $this->forumRepository->findAll();
+
+        $forumTopTendance = $this->forumRepository->getTopForumMessage()[0];
+        $forumGold = $this->forumRepository->getGoldForum()[0];
+        $NAForum = $this->forumRepository->getNAForum()[0];
+        $nbMessageTopForum = $this->forumRepository->getTopForumMessage()["counted"];
+        $nbMessageGoldForum = $this->forumRepository->getGoldForum()["counted"];
+        $nbMessageNAForum = $this->forumRepository->getNAForum()["counted"];
+        $mostActiveUser= $this->accountRepository->getMostActiveUser()[0];
+        $nbMessageMAU = $this->accountRepository->getMostActiveUser()["counted"];
+        dump($mostActiveUser);
+
         return $this->render('forum/index.html.twig', [
-            'controller_name' => 'ForumController',
+            'forums' =>$forumEntities,
+            'topForum'=>$forumTopTendance,
+            'needAttentionForum' =>$NAForum,
+            'goldForum'=>$forumGold,
+            'nbMessageTop'=>$nbMessageTopForum,
+            'nbMessageNA'=>$nbMessageNAForum,
+            'nbMessageGold'=>$nbMessageGoldForum,
+            'mostActiveUser'=>$mostActiveUser,
+            'nbMessageMAU'=>$nbMessageMAU,
         ]);
     }
+
+    //Show
 
     #[Route('/{name}', name: 'app_forum_show')]
     public function forum_show(string $name): Response
@@ -44,7 +75,7 @@ class ForumController extends AbstractController
     }
 
 
-    ############################# Topic ################################################
+    ############################# Topics ################################################
 
     #[Route('/{name}/create-topic', name: 'app_topic_create')]
     public function topic_create(string $name, Request $request): Response
@@ -129,19 +160,44 @@ class ForumController extends AbstractController
         }
 
         return $this->render('forum/topic_show.html.twig', [
+            'user'=>$this->getUser(),
             'topic'=>$topic,
             'form'=> $form->createView(),
         ]);
     }
 
-    // #[Route(name: 'app_topic_message')]
-    // public function messageForm(string $name, string $id, Request $request): Response
-    // {
+    ################################# Messages ###########################################
 
-    //     return $this->render('forum/message_form.html.twig', [
-    //         'form'=> $form->createView(),
-    //     ]);
-    // }
+    #[Route('{name}/topic/{topic}/edit_message/{message}', name: 'app_message_edit')]
+    public function messageEdit($name, $topic, Message $message, Request $request)
+    {
+        $topicEntity = $this->topicRepository->find($topic);
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $this->em->persist($message);
+            $this->em->flush();
+            return $this->redirectToRoute('app_topic_show', ["name"=>$name, 'id'=>$topic]);
+        }
+        
+        return $this->render('forum/topic_show.html.twig', [
+            'user'=>$this->getUser(),
+            'topic'=>$topicEntity,
+            'formEdit'=>$form->createView()
+        ]);
+        
+    }
+
+    
+    
+    #[Route('{name}/topic/{topic}/delete_message/{message}', name: 'app_message_delete')]
+    public function deleteMessage($name, $topic, Message $message)
+    {
+        $this->em->remove($message);
+        $this->em->flush();
+        return $this->redirectToRoute('app_topic_show', ["name"=>$name, 'id'=>$topic]);
+        
+    }
 
 
 

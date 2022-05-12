@@ -58,4 +58,16 @@ class AccountRepository extends ServiceEntityRepository
     public function getQbAll(){
         return $this->createQueryBuilder('a');
     }
+
+    public function getMostActiveUser(){
+
+        return $this->createQueryBuilder('a')
+        ->addSelect('COUNT(m) as counted')
+        ->join('a.messages', 'm')
+        ->orderBy('counted', 'DESC')
+        ->groupBy('a.id')
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getSingleResult();
+    }
 }
