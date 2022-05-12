@@ -10,6 +10,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Account;
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Form\GameSearchType;
 use App\Repository\CommentRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -122,6 +123,16 @@ class GamesController extends AbstractController
     public function index_admin(Request $request){
 
         $qb = $this->gameRepository->getQbAll();
+        $gameform = $this->createForm(GameSearchType::class);
+        $gameform->handleRequest($request);
+
+        if ($gameform->isSubmitted() && $gameform->isValid()) {
+            $data = $gameform->getData();
+            $qb = $this->gameRepository->updateQbByData($qb,$data);
+            
+        }
+              
+
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),
@@ -129,8 +140,9 @@ class GamesController extends AbstractController
         );
 
         return $this->render('games/index_admin.html.twig', [
-            'games'=>$this->gameRepository->findAll(),
-            'pagination' => $pagination
+            'games'=>$qb,
+            'pagination' => $pagination,
+            'gameForm'=> $gameform->createView()
         ]);
     }
 

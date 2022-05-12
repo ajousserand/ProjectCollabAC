@@ -140,7 +140,26 @@ class GameRepository extends ServiceEntityRepository
     }
 
     public function getQbAll(){
+        
         return $this->createQueryBuilder('g');
+    }
+
+    public function updateQbByData($qb, $data){
+            if(!empty($data['name'])){
+                $qb->andWhere('g.name LIKE :name')
+                   ->setParameter('name','%'.$data['name'].'%');
+            }
+            if(!empty($data['price'])){
+                $qb->andWhere('g.price >= :price')
+                   ->setParameter('price',$data['price']);
+            }
+            if(!empty($data['publishedAt'])){
+                $qb->andWhere('g.publishedAt >= :publishedAt')
+                   ->setParameter('publishedAt',$data['publishedAt']);
+            }
+
+
+        return $qb;
     }
 
   
