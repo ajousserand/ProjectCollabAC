@@ -141,7 +141,8 @@ class GameRepository extends ServiceEntityRepository
 
     public function getQbAll(){
         
-        return $this->createQueryBuilder('g');
+        return $this->createQueryBuilder('g')
+                    ->join('g.genres','genres');
     }
 
     public function updateQbByData($qb, $data){
@@ -156,6 +157,10 @@ class GameRepository extends ServiceEntityRepository
             if(!empty($data['publishedAt'])){
                 $qb->andWhere('g.publishedAt >= :publishedAt')
                    ->setParameter('publishedAt',$data['publishedAt']);
+            }
+            if((count($data['genres'])!=0)){
+                $qb->andWhere('genres  IN (:genres)')
+                   ->setParameter('genres',$data['genres']);
             }
 
 

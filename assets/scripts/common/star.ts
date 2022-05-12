@@ -1,13 +1,13 @@
 window.onload = () => {
 
-    const stars = document.querySelectorAll(".fa-star")
-
-    const note = document.querySelector(".note")
+    const stars = document.querySelectorAll(".fa-star");
+    
+    const note = document.querySelector(".note");
 
     for( let star of stars){
         star.addEventListener("mouseover", function(){
             resetStars();
-            this.style.color = "red";
+            this.style.color = "orangered";
 
             this.classList.add("fa-solid");
             this.classList.remove("fa-regular");
@@ -15,7 +15,7 @@ window.onload = () => {
             let previousStar = this.previousElementSibling;
 
             while(previousStar){
-                previousStar.style.color = "red";
+                previousStar.style.color = "orangered";
                 previousStar.classList.add( "fa-solid");
                 previousStar.classList.remove("fa-regular");
              
@@ -52,7 +52,7 @@ window.onload = () => {
                 console.log(note);
                 console.log(star);
                 /**@ts-ignore */
-                 star.style.color = "red";
+                 star.style.color = "orangered";
                  star.classList.add( "fa-solid");
                  star.classList.remove("fa-regular");
             }

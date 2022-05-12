@@ -128,11 +128,11 @@ class GamesController extends AbstractController
 
         if ($gameform->isSubmitted() && $gameform->isValid()) {
             $data = $gameform->getData();
+            dump($data);
             $qb = $this->gameRepository->updateQbByData($qb,$data);
-            
         }
               
-
+        
         $pagination = $this->paginator->paginate(
             $qb,
             $request->query->getInt('page', 1),

@@ -1,70 +1,86 @@
 {% extends 'base-front.html.twig' %}
 
+{% block title %}Admin/listes de jeux{% endblock %}
+
 {% block body %}
 
 <div class="container my-3">
-{{ form_start(gameForm) }}
-    {{ form_row(gameForm.name) }}
-    {{ form_row(gameForm.price) }}
-    {{ form_row(gameForm.publishedAt) }}
-    <button typt="submit" class="btn btn-warning">Filtrer</button>
-{{ form_end(gameForm) }}
-    <table class="table table-striped table-dark">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Publisher</th>
-                <th>Genre</th>
-                <th>Prix</th>
-                <th> </th>
-                <th> </th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row">
 
-            <h3 class="my-3">Jeux ( {{pagination.getTotalItemCount}} )</h3>
-            {% for game in pagination %}
-                <tr>
-                    <td><a href="{{ path('st_games', {slug:game.slug}) }}">{{game.name}}</a></td>
-                    {% if game.publisher %}
-                        <td>{{game.publisher.name}}</td>
-                    {% else %}
-                        <td> Inconnu </td>
-                    {% endif %}
-                    <td>{% for genre in game.genres %} {{genre.name}} {% endfor %}</td>
-                    <td>{{game.price}}€</td>
-                    <td><a href="{{path('app_games_edit', {slug:game.slug})}}"> <i class="fa-solid fa-pen"></i></a></td>
-                    <!-- Button trigger modal -->
-                    <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#modal_{{loop.index}}"><i class="fa-solid fa-trash"></i></button></td>
-                    <!-- Modal -->
-                    <div class="modal fade" id="modal_{{loop.index}}" tabindex="-1" aria-labelledby="modalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body text-dark">
-                                    Etes vous sur de vouloir supprimer le jeux "{{game.name}}"?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
-                                    <a href="{{path('app_games_delete', {slug:game.slug}) }}"
-                                        class="btn btn-primary">Oui</a>
+        {# side bar with filter search #}
+        <div class="col-2 border-end border-top border-warning rounded-right">
+            <div class="row">
+                <div class="col-12">
+                    {{ form_start(gameForm) }}         
+                        {{ form_row(gameForm.name) }}
+                        {{ form_row(gameForm.price) }}
+                        {{ form_row(gameForm.publishedAt) }}
+                </div>
+                <div class="col-12">
+                    {{ form_row(gameForm.genres) }}
+                </div>
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-warning">Filtrer</button>
+                <a href="{{path('app_games_admin')}}" class="btn btn-warning">Reset</a>
+                {{ form_end(gameForm) }}
+            </div>
+        </div>
+        <div class="col-10">
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Publisher</th>
+                        <th>Genre</th>
+                        <th>Prix</th>
+                        <th> </th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <h3 class="my-3 text-center">Jeux ( {{pagination.getTotalItemCount}} )</h3>
+                    {% for game in pagination %}
+                        <tr>
+                            <td><a href="{{ path('st_games', {slug:game.slug}) }}">{{game.name}}</a></td>
+                            {% if game.publisher %}
+                                <td>{{game.publisher.name}}</td>
+                            {% else %}
+                                <td> Inconnu </td>
+                            {% endif %}
+                            <td>{% for genre in game.genres %} {{genre.name}} {% endfor %}</td>
+                            <td>{{game.price}}€</td>
+                            <td><a href="{{path('app_games_edit', {slug:game.slug})}}"> <i class="fa-solid fa-pen"></i></a></td>
+                            <!-- Button trigger modal -->
+                            <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#modal_{{loop.index}}"><i class="fa-solid fa-trash"></i></button></td>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modal_{{loop.index}}" tabindex="-1" aria-labelledby="modalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body text-dark">
+                                            Etes vous sur de vouloir supprimer le jeux "{{game.name}}"?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Retour</button>
+                                            <a href="{{path('app_games_delete', {slug:game.slug}) }}"
+                                                class="btn btn-primary">Oui</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </tr>
-            {% endfor %}
-
-        </tbody>
-
-    </table>
-
-    <div class="num_pagination my-5">
-        {{knp_pagination_render(pagination)}}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="num_pagination my-5">
+                {{knp_pagination_render(pagination)}}
+            </div>
+            <a href="{{path('app_games_create')}}" class="btn btn-warning my-4"> Ajouter un jeu </a>
+        </div>
     </div>
 
-    <a href="{{path('app_games_create')}}" class="btn btn-warning my-4"> Ajouter un jeu </a>
 </div>
 
 {% endblock %}
