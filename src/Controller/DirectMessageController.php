@@ -37,7 +37,6 @@ class DirectMessageController extends AbstractController
                 'user'=>$user,
             ]);
         }
-        
 
         return $this->render('direct_message/index.html.twig', [
             'directMessages'=> $dmEntities,
