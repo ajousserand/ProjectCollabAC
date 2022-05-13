@@ -50,15 +50,19 @@ class DirectMessageRepository extends ServiceEntityRepository
     public function getAllDirectMessages($id){
         return $this->createQueryBuilder('dm')
         ->join('dm.createdBy', 'a')
-        ->where('a.id = :id')
+        ->where('a.id = :id OR dm.receiver = :id')
+        ->orderBy('dm.createdAt', 'DESC')
+        ->groupBy('dm.receiver')
         ->setParameter('id', $id)
+        ->setMaxResults(1)
         ->getQuery()->getResult();
     }
+
 
     public function getDirectMessageByUser($idUser, $idReceiver){
         return $this->createQueryBuilder('dm')
         ->join('dm.createdBy', 'a')
-        ->where('a.id = :id')
+        ->where('a.id = :id OR dm.receiver = :id')
         ->andWhere('dm.receiver = :idReceiver')
         ->setParameter('id', $idUser)
         ->setparameter('idReceiver', $idReceiver)

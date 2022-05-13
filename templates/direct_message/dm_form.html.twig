@@ -1,8 +1,8 @@
 
-
 {% if formConversation is defined %}
 
     {{form_start(formConversation)}}
+    {# Je cache l'input mail si la conversation est déja initié #}
         <div class="mailConvo">
             {{form_row(formConversation.email)}}
         </div>

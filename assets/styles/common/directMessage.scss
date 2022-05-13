@@ -7,6 +7,13 @@
 }
 
 .messageContainer{
-    border: solid rgba(255, 255, 255, 0.5) 1px;
-    border-radius: 12px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: solid rgba(255, 255, 255, 0.5) 1px;
+}
+
+.lienMessage{
+    :hover{
+        background-color: darken($color: $lg-bg, $amount: 1);
+    }
 }
