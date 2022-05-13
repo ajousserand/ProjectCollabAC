@@ -1,0 +1,22 @@
+{% extends 'base-front.html.twig' %}
+
+{% block body %}
+<div class="container mt-4">
+
+    {% if formConversation is defined %}
+        {% for message in conversation %}
+            {{message.createdBy.nickname}}:
+            {{message.content}}
+            <hr>
+        {% endfor %}
+    {% endif %}
+    
+    <div class="my-4">
+        <h3>Nouveau message:</h3>
+        {% include 'direct_message/dm_form.html.twig' %}
+    </div>
+
+    <a class="btn btn-warning my-4" href="{{path('app_direct_message')}}">Retour</a>
+</div>
+
+{% endblock %}

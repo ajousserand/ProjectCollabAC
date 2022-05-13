@@ -1,0 +1,52 @@
+{% extends 'base-front.html.twig' %}
+
+
+{% block body %}
+
+{% if user is not null %}
+
+<div class="container text-center">
+    <h1>Messages</h1>
+    <hr>
+    {% if directMessages|length == 0 %}
+
+    <p>Pas de message pour l'instant...
+
+    {% else %}
+
+    {% for message in directMessages %}
+        <a href="{{path('app_dm_conversation', {id:message.receiver.id})}}">
+        <div class="messageContainer my-4">
+            <b>{{message.createdBy.nickname}} to {{message.receiver.nickname}}:</b><br>
+            {{message.content}}
+             <div>
+                 {% if message.hasBeenSeen == true %}
+                    <span class="vu">Vu</span>
+                {% else %}
+                    <span class="vu">Distribué</span>
+                {% endif %}
+             </div>
+        </div>
+    </a>
+       
+
+    {% endfor %}
+
+    {% endif %}
+
+    <div class="text-center">
+        <a href="{{path('app_dm_send')}}"> <i class="fa-solid fa-comment-dots"></i></a>
+    </div>
+
+    {% else %}
+
+    <p>Vous n'êtes pas connecter. <a href="{{path('app_login')}}" class="text-warning">Connectez-vous</a> ou <a href="{{path('app_register')}}" class="text-warning"> Inscrivez-vous</a> pour voir vos </p>
+
+
+    {% endif %}
+
+</div>
+
+
+
+{% endblock %}

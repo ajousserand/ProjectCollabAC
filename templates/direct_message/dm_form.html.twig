@@ -1,0 +1,23 @@
+
+
+{% if formConversation is defined %}
+
+    {{form_start(formConversation)}}
+        <div class="mailConvo">
+            {{form_row(formConversation.email)}}
+        </div>
+        {{form_row(formConversation.content)}}
+        <button type="submit" class="btn btn-warning mt-5"> Envoyer </button>
+    {{form_end(formConversation)}} 
+{% else %}
+    {{form_start(form)}}
+        {{form_row(form.email)}}
+        {{form_row(form.content)}}
+        <button type="submit" class="btn btn-warning mt-5"> Envoyer </button>
+    {{form_end(form)}}
+
+{% endif %}
+
+{% if error is defined %}
+    <p class="text-danger mt-5">{{error}}</p>
+{% endif %}
