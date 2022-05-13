@@ -44,6 +44,7 @@
         render(controller('App\\Controller\\SearchController::searchBar'))
     }}
       {% if app.user %}
+      <div style="height: 50px"><img src="{{asset(('build/images/' ~ app.user.avatar))}}" alt="{{app.user.name}}" class="avatar mh-100" ></div>
       <a href="{{path('st_user_show',{name: app.user.name})}}" class="mx-3">{{ app.user.name ?? 'connexion' }}</a>
 
       <a href="{{path('app_logout')}}"><button class="btn btn-warning">

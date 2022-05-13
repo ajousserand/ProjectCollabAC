@@ -63,6 +63,9 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'createdBy', targetEntity: DirectMessage::class)]
     private $directMessages;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $avatar;
+
     public function __construct()
     {
         $this->libraries = new ArrayCollection();
@@ -372,6 +375,18 @@ class Account implements UserInterface, PasswordAuthenticatedUserInterface
                 $directMessage->setCreatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }
