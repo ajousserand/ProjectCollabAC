@@ -104,6 +104,7 @@ class DirectMessageController extends AbstractController
             $directMessage->setCreatedAt(new DateTime());
             $directMessage->setCreatedBy($user);
             $directMessage->setHasBeenSeen(FALSE);
+            $directMessage->setReceiver($account);
             $this->em->persist($directMessage);
             $this->em->flush();
             return $this->redirectToRoute('app_dm_conversation', ['id'=>$account->getId()]);
