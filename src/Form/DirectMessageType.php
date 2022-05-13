@@ -27,6 +27,7 @@ class DirectMessageType extends AbstractType
                 ->add('email', EmailType::class, [
                     'label'=> 'Envoyé à:',
                     'mapped' => false,
+                    'required'=>false
                 ])
         ;
     }
