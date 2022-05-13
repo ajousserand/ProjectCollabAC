@@ -52,22 +52,36 @@ class DirectMessageRepository extends ServiceEntityRepository
         ->join('dm.createdBy', 'a')
         ->where('a.id = :id OR dm.receiver = :id')
         ->orderBy('dm.createdAt', 'DESC')
-        ->groupBy('dm.receiver')
+        ->groupBy('a')
         ->setParameter('id', $id)
-        ->setMaxResults(1)
         ->getQuery()->getResult();
     }
 
 
-    public function getDirectMessageByUser($idUser, $idReceiver){
+    public function getDirectMessageByUser($idUser, $idAccount){
         return $this->createQueryBuilder('dm')
-        ->join('dm.createdBy', 'a')
-        ->where('a.id = :id OR dm.receiver = :id')
-        ->andWhere('dm.receiver = :idReceiver')
-        ->setParameter('id', $idUser)
-        ->setparameter('idReceiver', $idReceiver)
+        // ->join('dm.createdBy', 'a')
+        // ->join('dm.receiver', 'r')
+        ->where('dm.createdBy = :user OR dm.receiver = :user')
+        ->andWhere('dm.createdBy = :userSecond OR dm.receiver = :userSecond')
+        ->orderBy('dm.createdAt')
+        ->setParameter('user', $idUser)
+        ->setparameter('userSecond', $idAccount)
         ->getQuery()->getResult();
     }
+
+    // public function getDirectMessageByUserReceiver($idUser, $idAccount){
+    //     return $this->createQueryBuilder('dm')
+    //     // ->join('dm.createdBy', 'a')
+    //     // ->join('dm.receiver', 'r')
+    //     ->where('dm.createdBy = :user OR dm.receiver = :user')
+    //     ->andWhere('dm.createdBy = :userSecond OR dm.receiver = :userSecond')
+    //     ->groupBy('dm.createdBy, dm.receiver')
+    //     ->orderBy('dm.createdAt')
+    //     ->setParameter('user', $idUser)
+    //     ->setparameter('userSecond', $idAccount)
+    //     ->getQuery()->getResult();
+    // }
 
     
     // /**

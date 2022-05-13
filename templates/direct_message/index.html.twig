@@ -18,7 +18,11 @@
 
         {% for message in directMessages %}
             <div class="lienMessage">
-                <a href="{{path('app_dm_conversation', {id:message.receiver.id})}}">
+                {% if message.createdBy.id == user.id %}
+                    <a href="{{path('app_dm_conversation', {id:message.receiver.id})}}">
+                {% else %}
+                    <a href="{{path('app_dm_conversation', {id:message.createdBy.id})}}">
+                {% endif %}
                 <div class="messageContainer">
                     <p><b>{{message.createdBy.nickname}} to {{message.receiver.nickname}}:</b></p>
                     <p>{{message.content}}</p>

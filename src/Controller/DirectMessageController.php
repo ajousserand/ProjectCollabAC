@@ -31,7 +31,10 @@ class DirectMessageController extends AbstractController
         $user = $this->getUser();
 
         if($user){
+
             $dmEntities = $this->dmRepository->getAllDirectMessages($user->getId());
+        
+
         }else{
             return $this->render('direct_message/index.html.twig', [
                 'user'=>$user,
@@ -89,8 +92,19 @@ class DirectMessageController extends AbstractController
     #[Route('/direct_message/send/{id}', name: 'app_dm_conversation')]
     public function sendAgain(Account $account,Request $request): Response
     {
+        /** @var Account */
         $user = $this->getUser();
-        $conversation = $this->dmRepository->getDirectMessageByUser($user, $account->getId());
+        $conversation = $this->dmRepository->getDirectMessageByUser($user, $account);
+        // foreach($conversation as $message){
+        //     $
+        //     if($message->getCreatedBy() == $user){
+        //         $creator = $user;
+        //     }
+
+        //     if($message->getReceiver() == $user){
+                
+        //     }
+        // }
         // dd($conversation);
 
         
